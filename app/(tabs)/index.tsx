@@ -3,7 +3,7 @@ import { drink1, drink2, drink3, drink4 } from '@/database';
 import { Ionicons } from '@expo/vector-icons';
 import { router } from 'expo-router';
 import React, { useState } from 'react';
-import { Image, ScrollView, StatusBar, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { Image, ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native';
 
 export default function index() {
   const [cappuccino,setCappuccino] = useState(1);
@@ -37,7 +37,7 @@ export default function index() {
   return (
     <View className="flex-1 px-8 pt-5" style ={{backgroundColor: Colors.primary}}>
       <ScrollView contentContainerStyle ={{paddingBottom: 20}} showsVerticalScrollIndicator = {false}>
-        <StatusBar backgroundColor={Colors.primary}/>
+        {/* <StatusBar backgroundColor={Colors.primary}/> */}
         <View className='flex flex-row justify-center mb-12 gap-2'>
           <Text className='text-[#877b74] text-[32px]'>déjà</Text>
           <Text className='text-white text-[32px]'>Brew</Text>
