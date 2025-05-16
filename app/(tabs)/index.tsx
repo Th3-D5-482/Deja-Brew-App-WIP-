@@ -111,7 +111,7 @@ export default function index() {
     setAmericano(0);
     setEspresso(1);
   }
-
+  
   return (
     <View className="flex-1 px-8 pt-5" style ={{backgroundColor: Colors.primary}}>
       <ScrollView contentContainerStyle ={{paddingBottom: 20}} showsVerticalScrollIndicator = {false}>
