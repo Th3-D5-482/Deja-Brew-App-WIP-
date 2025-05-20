@@ -5,9 +5,9 @@ import React, { useState } from 'react'
 import { Image, ScrollView, Text, TouchableOpacity, View } from 'react-native'
 
 export default function description() {
-  const {image,name,price,ratings,description,subTitle,isFavorite,isCart} = useLocalSearchParams();
-  const [favorite,setFavorite] = useState(isFavorite ==="false");
-  const [cart,setCart] = useState(isCart ==="false");
+  const {image,name,price,ratings,description,subTitle} = useLocalSearchParams();
+  const [favorite,setFavorite] = useState(false);
+  const [cart,setCart] = useState(false);
 
   return (
     <View className ='flex-1 px-8 pt-5' style = {{backgroundColor: Colors.primary}}>
@@ -49,10 +49,10 @@ export default function description() {
           <Text className='text-white text-2xl mt-2 font-bold'>${price}</Text>
         </View>
         <View className='w-[80%] my-auto'>
-          {cart ? <TouchableOpacity className='bg-[#efe3c8] rounded-xl p-5 w-[80%] ml-[55px]' onPress={()=> setCart(!cart)}>
-            <Text className='text-center text-xl font-bold'>Add to Cart</Text>
-          </TouchableOpacity> : <TouchableOpacity className='rounded-xl p-5 w-[80%] ml-[55px]' style ={{backgroundColor: Colors.inactiveTab}}onPress={()=> setCart(!cart)}>
-            <Text className='text-center text-2xl font-bold'>Remove from Cart</Text>
+          {cart ? <TouchableOpacity className='rounded-xl p-5 w-[80%] ml-[55px]' style ={{backgroundColor: Colors.inactiveTab}}onPress={()=> setCart(!cart)}>
+            <Text className='text-center text-xl font-bold'>Remove from Cart</Text>
+          </TouchableOpacity> : <TouchableOpacity className='bg-[#efe3c8] rounded-xl p-5 w-[80%] ml-[55px]' onPress={()=> setCart(!cart)}>
+            <Text className='text-center text-2xl font-bold'>Add to Cart</Text>
           </TouchableOpacity>}
         </View>
       </View>

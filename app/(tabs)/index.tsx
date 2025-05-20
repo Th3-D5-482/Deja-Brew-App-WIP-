@@ -14,9 +14,8 @@ interface coffeeItem {
   ratings: number;
   description: string;
   subTitle: string;
-  isFavorite: boolean;
-  isCart: boolean;
   image: string;
+  catID: number;
 }
 
 export default function index() {
@@ -25,57 +24,21 @@ export default function index() {
   const [latte,setLatte] = useState(0);
   const [americano,setAmericano] = useState(0);
   const [espresso,setEspresso] = useState(0);
-  const [drink1,setDrink1] = useState<coffeeItem[]>([]);
-  const [drink2,setDrink2] = useState<coffeeItem[]>([]);
-  const [drink3,setDrink3] = useState<coffeeItem[]>([]);
-  const [drink4,setDrink4] = useState<coffeeItem[]>([]);
+  const [drink,setDrink] = useState<coffeeItem[]>([]);
 
   useEffect(()=>{
     try {
       const app = initializeApp(firebaseConfig);
       const database = getDatabase(app);
-      const drink1Ref = ref(database,"drinks1");
-      const drink2Ref = ref(database,"drinks2");
-      const drink3Ref = ref(database,"drinks3");
-      const drink4Ref = ref(database,"drinks4");
-      onValue(drink1Ref,(snapshot) => {
+      const drinkRef = ref(database,"Drinks");
+      onValue(drinkRef,(snapshot) => {
         const data = snapshot.val();
         if (data) {
-          const drink1Array = Object.keys(data).map(keys => ({
+          const drinkArray = Object.keys(data).map(keys => ({
             id:keys,
             ...data[keys],
           }))
-          setDrink1(drink1Array);
-        }
-      })
-      onValue(drink2Ref,(snapshot) => {
-        const data = snapshot.val();
-        if (data) {
-          const drinks2Array = Object.keys(data).map(keys =>({
-            id:keys,
-            ...data[keys]
-          }))
-          setDrink2(drinks2Array);
-        }
-      })
-      onValue(drink3Ref,(snapshot)=>{
-        const data = snapshot.val();
-        if (data) {
-          const drinks3Array = Object.keys(data).map(keys => ({
-            id: keys,
-            ...data[keys],
-          }))
-          setDrink3(drinks3Array);
-        }
-      })
-      onValue(drink4Ref,(snapshot) => {
-        const data = snapshot.val();
-        if (data) {
-          const drinks4Array = Object.keys(data).map(keys => ({
-            id: keys,
-            ...data[keys],
-          }))
-          setDrink4(drinks4Array);
+          setDrink(drinkArray);
         }
       })
     } 
@@ -141,9 +104,9 @@ export default function index() {
           </View>
           <View className='flex-row flex-wrap justify-between'>
             { cappuccino == 1 && 
-                drink1.slice(0,6).map((item,index) => {
+                drink.filter(item => item.catID === 0).slice(0,6).map((item,index) => {
                   return (
-                    <TouchableOpacity onPress = {() => router.push({pathname: "/description",params: {image: item.image,name: item.name, price: item.price, ratings: item.ratings, description: item.description, subTitle: item.subTitle, isFavorite: item.isFavorite.toString(), isCart: item.isCart.toString()}})} key={index} className='w-[48%] h-[300px] bg-[#362c36] px-5 rounded-xl py-5 mt-5'>
+                    <TouchableOpacity onPress = {() => router.push({pathname: "/description",params: {image: item.image,name: item.name, price: item.price, ratings: item.ratings, description: item.description, subTitle: item.subTitle}})} key={index} className='w-[48%] h-[300px] bg-[#362c36] px-5 rounded-xl py-5 mt-5'>
                       <Image source={{uri:item.image}} style={{ width: 120, height: 150, objectFit: "cover"}} className='mx-auto'/>
                       <Text className='mt-3 text-white text-xl md:mx-auto h-[50px]'>{item.name}</Text>
                       <View className='w-full mt-3 h-10 bg-[#463d46] rounded-xl flex flex-row justify-between'>
@@ -158,9 +121,9 @@ export default function index() {
             }
             {
               latte == 1 && 
-              drink2.slice(0,6).map((item,index) => {
+              drink.filter(item => item.catID === 1).slice(0,6).map((item,index) => {
                 return (
-                  <TouchableOpacity className='w-[48%] h-[300px] bg-[#362c36] px-5 rounded-xl py-5 mt-5' key={index} onPress={() => router.push({pathname: "/description", params: {image: item.image, name: item.name, price: item.price, ratings: item.ratings, description: item.description, subTitle: item.subTitle, isFavorite: item.isFavorite.toString(), isCart: item.isCart.toString()}})}>
+                  <TouchableOpacity className='w-[48%] h-[300px] bg-[#362c36] px-5 rounded-xl py-5 mt-5' key={index} onPress={() => router.push({pathname: "/description", params: {image: item.image, name: item.name, price: item.price, ratings: item.ratings, description: item.description, subTitle: item.subTitle}})}>
                     <Image source={{uri:item.image}} style={{ width: 120, height: 150, objectFit: "cover"}} className='mx-auto'/>
                     <Text className='mt-3 text-white text-xl md:mx-auto h-[50px]'>{item.name}</Text>
                     <View className='w-full mt-3 h-10 bg-[#463d46] rounded-xl flex flex-row justify-between'>
@@ -175,10 +138,10 @@ export default function index() {
             }
             {
               americano == 1 && 
-              drink3.slice(0,6).map((item,index) => {
+              drink.filter(item => item.catID === 2).slice(0,6).map((item,index) => {
                 return (
-                  <TouchableOpacity className='w-[48%] h-[300px] bg-[#362c36] px-5 rounded-xl py-5 mt-5' key={index} onPress={() => router.push({pathname: "/description", params: {image: item.image, name: item.name, price: item.price, ratings: item.ratings, description: item.description, subTitle: item.subTitle, isFavorite: item.isFavorite.toString(), isCart: item.isCart.toString()}})}>
-                    <Image source={{uri: item.image}} style={{ width: 120, height: 150, objectFit: "cover"}} className='mx-auto'/>
+                  <TouchableOpacity className='w-[48%] h-[300px] bg-[#362c36] px-5 rounded-xl py-5 mt-5' key={index} onPress={() => router.push({pathname: "/description", params: {image: item.image, name: item.name, price: item.price, ratings: item.ratings, description: item.description, subTitle: item.subTitle}})}>
+                    <Image source={{uri:item.image}} style={{ width: 120, height: 150, objectFit: "cover"}} className='mx-auto'/>
                     <Text className='mt-3 text-white text-xl md:mx-auto h-[50px]'>{item.name}</Text>
                     <View className='w-full mt-3 h-10 bg-[#463d46] rounded-xl flex flex-row justify-between'>
                       <Text className='py-1 text-white text-2xl font-bold mx-auto'>${item.price}</Text>
@@ -192,10 +155,10 @@ export default function index() {
             }
             {
               espresso == 1 && 
-              drink4.slice(0,6).map((item,index) => {
+              drink.filter(item => item.catID === 3).slice(0,6).map((item,index) => {
                 return (
-                  <TouchableOpacity className='w-[48%] h-[300px] bg-[#362c36] px-5 rounded-xl py-5 mt-5' key={index} onPress={() => router.push({pathname: "/description", params: {image: item.image, name: item.name, price: item.price, ratings: item.ratings, description: item.description, subTitle: item.subTitle, isFavorite: item.isFavorite.toString(), isCart: item.isCart.toString()}})}>
-                    <Image source={{uri: item.image}} style={{ width: 120, height: 150, objectFit: "cover"}} className='mx-auto'/>
+                  <TouchableOpacity className='w-[48%] h-[300px] bg-[#362c36] px-5 rounded-xl py-5 mt-5' key={index} onPress={() => router.push({pathname: "/description", params: {image: item.image, name: item.name, price: item.price, ratings: item.ratings, description: item.description, subTitle: item.subTitle}})}>
+                    <Image source={{uri:item.image}} style={{ width: 120, height: 150, objectFit: "cover"}} className='mx-auto'/>
                     <Text className='mt-3 text-white text-xl md:mx-auto h-[50px]'>{item.name}</Text>
                     <View className='w-full mt-3 h-10 bg-[#463d46] rounded-xl flex flex-row justify-between'>
                       <Text className='py-1 text-white text-2xl font-bold mx-auto'>${item.price}</Text>
