@@ -1,15 +1,19 @@
 import { Colors } from '@/components/colors'
+import { Ionicons } from '@expo/vector-icons'
+import { router } from 'expo-router'
 import React from 'react'
-import { Image, ScrollView, Text, View } from 'react-native'
+import { ScrollView, Text, TouchableOpacity, View } from 'react-native'
 
 export default function profile() {
   return (
-    <View className='flex-1 px-16 pt-32 md:pt-5' style ={{backgroundColor: Colors.primary}}>
+    <View className='flex-1 px-8 pt-8' style ={{backgroundColor: Colors.primary}}>
       <ScrollView showsVerticalScrollIndicator ={false}>
-        <Text className='text-white text-[24px] text-center font-bold underline mb-32'>Project: Lyon</Text>
-        <Image source={require('@/assets/images/cofee_cup.png')} style = {{width: 300, height: 300}}className='relative mb-32 mx-auto'/>
-        <Text className='text-white text-[24px] text-center font-bold underline mb-5'>Work In Progress</Text>
-        <Text className='text-[20px] text-center text-white'>By: Th3_D5_482</Text>
+        <View className='h-[40px] flex flex-row'>
+          <TouchableOpacity onPress={() => router.push('/(tabs)')}>
+            <Ionicons name ="arrow-back" color ={Colors.inactiveTab} size ={32}/>
+          </TouchableOpacity>
+          <Text className='text-3xl text-white ml-32 py-1 font-bold'>Profile</Text>
+        </View>
       </ScrollView>
     </View>
   )
