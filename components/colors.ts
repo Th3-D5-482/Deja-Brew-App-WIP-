@@ -5,4 +5,5 @@ export const Colors = {
     inactiveTab: '#746763',
     star: '#D3A601',
     tertiary: "#C94C4C",
+    delete: "#800000",
 }

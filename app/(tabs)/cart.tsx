@@ -2,7 +2,7 @@ import { Colors } from '@/components/colors'
 import { Ionicons } from '@expo/vector-icons'
 import { router } from 'expo-router'
 import React from 'react'
-import { ScrollView, Text, TouchableOpacity, View } from 'react-native'
+import { Image, ScrollView, Text, TouchableOpacity, View } from 'react-native'
 
 export default function cart() {
   return (
@@ -13,6 +13,30 @@ export default function cart() {
           <Ionicons name ="arrow-back" color ={Colors.inactiveTab} size ={28}/>
         </TouchableOpacity>
         <Text className='text-2xl text-white text-center py-1 font-bold ml-1'>Cart</Text>
+      </View>
+      <View className='border border-red-800 mt-5 h-[690px]'>
+        <View className='border border-green-800 h-[130px] rounded-xl bg-[#362c36] flex flex-row px-4 py-4'>
+          <View className='w-[32%] rounded-xl'>
+            <Image source ={require('@/assets/images/classic-cappuccino.png')} style ={{width: 100, height: 100,objectFit: "contain"}}/>
+          </View>
+          <View className='w-[68%] flex flex-col gap-2 pl-2'>
+            <View className='h-[30px] flex flex-row justify-between'>
+              <Text className='text-white text-xl'>Classic Cappuccino</Text>
+              <Ionicons name ="trash" size ={26} color={Colors.delete}/>
+            </View>
+            <Text className='text-gray-400'>Fortified with Tradition</Text>
+            <Text className='text-white font-bold text-2xl'>$4.35</Text>
+            <View className='relative w-[50%] flex flex-row justify-between top-[-25px] left-[105px]'>
+                <TouchableOpacity className='w-7 h-7 bg-[#efe3c8]'>
+                  <Ionicons name ="remove" size ={26}/>
+                </TouchableOpacity>
+                <Text className='text-2xl text-white'>1</Text>
+                <TouchableOpacity className='w-7 h-7 bg-[#efe3c8]'>
+                  <Ionicons name ="add" size ={26}/>
+                </TouchableOpacity>
+              </View>
+          </View>
+        </View>
       </View>
       </ScrollView>
     </View>
