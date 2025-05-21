@@ -16,7 +16,7 @@ export default function description() {
               <Image source={{uri: String(image)}} style={{ width: 400, height: 480, objectFit: 'contain' }} className='mx-auto' />
                 <View className='rounded-full h-12 w-12 top-[-460px] p-1'>
                   <TouchableOpacity onPress={() => router.back()}>
-                    <Ionicons name='arrow-back' color={Colors.inactiveTab} size ={32}></Ionicons>
+                    <Ionicons name='arrow-back' color={Colors.inactiveTab} size ={28}></Ionicons>
                   </TouchableOpacity>
                 </View>
             </View>

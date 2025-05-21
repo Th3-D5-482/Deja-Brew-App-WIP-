@@ -10,9 +10,9 @@ export default function cart() {
       <ScrollView showsVerticalScrollIndicator ={false}>
         <View className='h-[40px] flex flex-row'>
         <TouchableOpacity onPress={() => router.push('/(tabs)')} className='py-1'>
-          <Ionicons name ="arrow-back" color ={Colors.inactiveTab} size ={32}/>
+          <Ionicons name ="arrow-back" color ={Colors.inactiveTab} size ={28}/>
         </TouchableOpacity>
-        <Text className='text-3xl text-white text-center py-1 font-bold ml-1'> Cart</Text>
+        <Text className='text-2xl text-white text-center py-1 font-bold ml-1'>Cart</Text>
       </View>
       </ScrollView>
     </View>
