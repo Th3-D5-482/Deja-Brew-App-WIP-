@@ -13,7 +13,7 @@ export default function profile() {
         </TouchableOpacity>
         <Text className='text-3xl text-white text-center py-1 font-bold'> Profile</Text>
       </View>
-      <View className='mt-8 h-[680px]'>
+      <View className='mt-5 h-[680px]'>
         <View className='h-[250px] w-[250px] border border-purple-800 rounded-full p-1 overflow-hidden mx-auto mt-8'>
           <Image source ={{uri: 'https://ik.imagekit.io/j7iwyd9ys/Deja%20Brew/Th3_D5_482.jpeg?updatedAt=1747756993672'}} style ={{width: 240, height: 240, objectFit: 'contain'}}/>
         </View>
