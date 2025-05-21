@@ -11,7 +11,7 @@ export default function profile() {
         <TouchableOpacity onPress={() => router.push('/(tabs)')} className='py-1'>
           <Ionicons name ="arrow-back" color ={Colors.inactiveTab} size ={32}/>
         </TouchableOpacity>
-        <Text className='text-3xl text-white text-center py-1 font-bold'> Profile</Text>
+        <Text className='text-3xl text-white text-center py-1 font-bold ml-1'>Profile</Text>
       </View>
       <View className='mt-5 h-[680px]'>
         <View className='h-[250px] w-[250px] border border-purple-800 rounded-full p-1 overflow-hidden mx-auto mt-8'>
