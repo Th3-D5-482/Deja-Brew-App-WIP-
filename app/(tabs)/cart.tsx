@@ -1,11 +1,23 @@
 import { Colors } from '@/components/colors'
 import { Ionicons } from '@expo/vector-icons'
 import { router } from 'expo-router'
-import React from 'react'
+import React, { useState } from 'react'
 import { Image, ScrollView, Text, TouchableOpacity, View } from 'react-native'
 
 export default function cart() {
-  let quantityInCart = 1;
+  const fixedPrice = 4.35;
+  const [price,setPrice] = useState(fixedPrice);
+  const [quantityInCart,setQuantityInCart] = useState(1);
+  function decreaseNumberInCart() {
+    if (quantityInCart != 1) {
+      setQuantityInCart(quantityInCart - 1);
+      setPrice(parseFloat(((quantityInCart - 1) * fixedPrice).toFixed(2)));
+    }
+  }
+  function increaseNumberInCart() {
+    setQuantityInCart(quantityInCart + 1);
+    setPrice(parseFloat(((quantityInCart + 1) * fixedPrice).toFixed(2)));
+  }
   return (
     <View className='flex-1 px-8 pt-8 ' style ={{backgroundColor: Colors.primary}}>
       <ScrollView showsVerticalScrollIndicator ={false}>
@@ -27,13 +39,13 @@ export default function cart() {
             </View>
             <Text className='text-gray-400'>Fortified with Tradition</Text>
             <View className='flex flex-row justify-between mt-1'>
-              <Text className='text-white font-bold text-2xl'>$4.35</Text>
+              <Text className='text-white font-bold text-2xl'>${price}</Text>
               <View className='w-[50%] flex flex-row justify-between'>
-                <TouchableOpacity className='w-7 h-7 bg-[#efe3c8]'>
+                <TouchableOpacity className='w-7 h-7 bg-[#efe3c8]' onPress={decreaseNumberInCart}>
                   <Ionicons name ="remove" size ={26}/>
                 </TouchableOpacity>
                 <Text className='text-2xl text-white'>{quantityInCart}</Text>
-                <TouchableOpacity className='w-7 h-7 bg-[#efe3c8]'>
+                <TouchableOpacity className='w-7 h-7 bg-[#efe3c8]' onPress={increaseNumberInCart}>
                   <Ionicons name ="add" size ={26}/>
                 </TouchableOpacity>
               </View>
