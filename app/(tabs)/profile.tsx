@@ -14,7 +14,7 @@ export default function profile() {
         <Text className='text-2xl text-white text-center py-1 font-bold ml-1'>Profile</Text>
       </View>
       <View className='mt-5 h-[680px]'>
-        <View className='h-[250px] w-[250px] border border-purple-800 rounded-full p-1 overflow-hidden mx-auto mt-8'>
+        <View className='h-[250px] w-[250px] rounded-full p-1 overflow-hidden mx-auto mt-8'>
           <Image source ={{uri: 'https://ik.imagekit.io/j7iwyd9ys/Deja%20Brew/Th3_D5_482.jpeg?updatedAt=1747756993672'}} style ={{width: 240, height: 240, objectFit: 'contain'}}/>
         </View>
         <Text className='text-white text-3xl text-center mt-5 font-bold'>Th3_D5_482</Text>
