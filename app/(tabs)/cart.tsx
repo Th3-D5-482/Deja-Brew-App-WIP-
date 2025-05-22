@@ -5,6 +5,7 @@ import React from 'react'
 import { Image, ScrollView, Text, TouchableOpacity, View } from 'react-native'
 
 export default function cart() {
+  let quantityInCart = 1;
   return (
     <View className='flex-1 px-8 pt-8 ' style ={{backgroundColor: Colors.primary}}>
       <ScrollView showsVerticalScrollIndicator ={false}>
@@ -25,16 +26,18 @@ export default function cart() {
               <Ionicons name ="trash" size ={26} color={Colors.delete}/>
             </View>
             <Text className='text-gray-400'>Fortified with Tradition</Text>
-            <Text className='text-white font-bold text-2xl'>$4.35</Text>
-            <View className='relative w-[50%] flex flex-row justify-between top-[-25px] left-[105px]'>
+            <View className='flex flex-row justify-between mt-1'>
+              <Text className='text-white font-bold text-2xl'>$4.35</Text>
+              <View className='w-[50%] flex flex-row justify-between'>
                 <TouchableOpacity className='w-7 h-7 bg-[#efe3c8]'>
                   <Ionicons name ="remove" size ={26}/>
                 </TouchableOpacity>
-                <Text className='text-2xl text-white'>1</Text>
+                <Text className='text-2xl text-white'>{quantityInCart}</Text>
                 <TouchableOpacity className='w-7 h-7 bg-[#efe3c8]'>
                   <Ionicons name ="add" size ={26}/>
                 </TouchableOpacity>
               </View>
+            </View>
           </View>
         </View>
       </View>
