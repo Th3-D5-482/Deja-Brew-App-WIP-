@@ -27,8 +27,8 @@ export default function cart() {
         </TouchableOpacity>
         <Text className='text-2xl text-white text-center py-1 font-bold ml-1'>Cart</Text>
       </View>
-      <View className='border border-red-800 mt-5 h-[690px]'>
-        <View className='border border-green-800 h-[130px] rounded-xl bg-[#362c36] flex flex-row px-4 py-4'>
+      <View className='border border-red-800 mt-5 h-[690px] flex flex-col gap-7'>
+        <View className='h-[130px] rounded-xl bg-[#362c36] flex flex-row px-4 py-4'>
           <View className='w-[32%] rounded-xl'>
             <Image source ={require('@/assets/images/classic-cappuccino.png')} style ={{width: 100, height: 100,objectFit: "contain"}}/>
           </View>
