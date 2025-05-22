@@ -15,7 +15,7 @@ export default function cart() {
         </TouchableOpacity>
         <Text className='text-2xl text-white text-center py-1 font-bold ml-1'>Cart</Text>
       </View>
-      <View className='border border-red-800 mt-5 max-h-max flex flex-col gap-7'>
+      <View className='mt-5 max-h-max flex flex-col gap-7'>
         {
           testDatabase.map((item,index) => {
             const [price,setPrice] = useState(item.price * item.numberInCart);
@@ -61,6 +61,11 @@ export default function cart() {
         } 
       </View>
       </ScrollView>
+      <View>
+        <TouchableOpacity className='h-[60px] rounded-xl mb-5 bg-[#efe3c8] py-4'>
+          <Text className='text-center text-2xl font-bold'>Pay Now</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   )
 }

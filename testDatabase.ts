@@ -20,5 +20,5 @@ export const testDatabase = [
         ratings: 4.6,
         subTitle: "Drenched in Golden Bliss",
         numberInCart: 1,
-    }
+    },
 ];
