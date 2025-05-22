@@ -30,7 +30,7 @@ export default function cart() {
               setQuantityInCart(quantityInCart + 1);
               setPrice(parseFloat(((quantityInCart + 1) * item.price).toFixed(2)));
             }
-            return testDatabase.length ? (
+            return (
               <View className='h-[130px] rounded-xl bg-[#362c36] flex flex-row px-4 py-4' key ={index}>
               <View className='w-[32%] rounded-xl'>
                 <Image source ={{uri: item.image}} style ={{width: 100, height: 100,objectFit: "contain"}}/>
@@ -55,8 +55,7 @@ export default function cart() {
             </View> 
           </View>
         </View>
-            ) : 
-            <Text>Hello World</Text>
+            )
           }) 
         } 
       </View>
