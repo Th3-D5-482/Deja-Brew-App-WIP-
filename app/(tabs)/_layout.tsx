@@ -27,12 +27,22 @@ export default function _layout() {
             tabBarIcon: ({size,color}) => (
                 <Ionicons name ="cart" size={size} color={color} />
             ),
+            tabBarBadge: "1",
+            tabBarBadgeStyle: {
+                backgroundColor: Colors.tertiary,
+                height: 18,
+            }
             }} />
         <Tabs.Screen name="favorites" options={{
             title: "Favorites",
             tabBarIcon: ({size,color}) => (
                 <Ionicons name ="heart" size={size} color={color} />
             ),
+             tabBarBadge: "1",
+            tabBarBadgeStyle: {
+                backgroundColor: Colors.tertiary,
+                height: 18,
+            }
             }} />
         <Tabs.Screen name="profile" options={{
             title: "Profile",
