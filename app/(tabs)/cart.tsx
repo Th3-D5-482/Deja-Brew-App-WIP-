@@ -1,5 +1,5 @@
 import { Colors } from '@/components/colors'
-import { testDatabase } from '@/testDatabase'
+import { cartData } from '@/testDatabase'
 import { Ionicons } from '@expo/vector-icons'
 import { router } from 'expo-router'
 import React, { useState } from 'react'
@@ -17,7 +17,7 @@ export default function cart() {
       </View>
       <View className='mt-5 max-h-max flex flex-col gap-7'>
         {
-          testDatabase.map((item,index) => {
+          cartData.map((item,index) => {
             const [price,setPrice] = useState(item.price * item.numberInCart);
             const [quantityInCart,setQuantityInCart] = useState(item.numberInCart);
             function decreaseNumberInCart() {
@@ -59,7 +59,6 @@ export default function cart() {
           }) 
         } 
       </View>
-      
       </ScrollView>
       <View>
         <TouchableOpacity className='h-[60px] rounded-xl mb-5 bg-[#efe3c8] py-4'>

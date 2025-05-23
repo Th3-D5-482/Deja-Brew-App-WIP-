@@ -1,4 +1,4 @@
-export const testDatabase = [
+export const cartData = [
     {
         catID: 0,
         description: "A bold shot of espresso meets perfectly steamed milk, crowned with thick, frothy foam. The result? A velvety, full-bodied experience that balances rich intensity with creamy contrast—both invigorating and indulgent in every sip.",
@@ -21,4 +21,7 @@ export const testDatabase = [
         subTitle: "Drenched in Golden Bliss",
         numberInCart: 1,
     },
+];
+export const favoriteData = [
+    
 ];

@@ -1,4 +1,5 @@
 import { Colors } from '@/components/colors'
+import { cartData, favoriteData } from '@/testDatabase'
 import { Ionicons } from '@expo/vector-icons'
 import { Tabs } from 'expo-router'
 import React from 'react'
@@ -27,22 +28,22 @@ export default function _layout() {
             tabBarIcon: ({size,color}) => (
                 <Ionicons name ="cart" size={size} color={color} />
             ),
-            tabBarBadge: "1",
-            tabBarBadgeStyle: {
+            tabBarBadge: cartData.length,
+            tabBarBadgeStyle: cartData.length ?{
                 backgroundColor: Colors.tertiary,
                 height: 18,
-            }
+            } : null
             }} />
         <Tabs.Screen name="favorites" options={{
             title: "Favorites",
             tabBarIcon: ({size,color}) => (
                 <Ionicons name ="heart" size={size} color={color} />
             ),
-             tabBarBadge: "1",
-            tabBarBadgeStyle: {
+             tabBarBadge: favoriteData.length,
+            tabBarBadgeStyle: favoriteData.length ? {
                 backgroundColor: Colors.tertiary,
                 height: 18,
-            }
+            } : null
             }} />
         <Tabs.Screen name="profile" options={{
             title: "Profile",
