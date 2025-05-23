@@ -28,7 +28,7 @@ export default function _layout() {
             tabBarIcon: ({size,color}) => (
                 <Ionicons name ="cart" size={size} color={color} />
             ),
-            tabBarBadge: cartData.length,
+            tabBarBadge: cartData?.length > 0 ? cartData.length : undefined,
             tabBarBadgeStyle: cartData.length ?{
                 backgroundColor: Colors.tertiary,
                 height: 18,
