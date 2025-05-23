@@ -61,8 +61,8 @@ export default function cart() {
       </View>
       </ScrollView>
       <View>
-        <TouchableOpacity className='h-[60px] rounded-xl mb-5 bg-[#efe3c8] py-4'>
-          <Text className='text-center text-2xl font-bold'>Pay Now</Text>
+        <TouchableOpacity className='h-[50px] rounded-xl mb-5 bg-[#efe3c8] py-4'>
+          <Text className='text-center text-xl font-bold'>Pay Now</Text>
         </TouchableOpacity>
       </View>
     </View>

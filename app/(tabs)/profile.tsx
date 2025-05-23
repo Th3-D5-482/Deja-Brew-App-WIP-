@@ -20,7 +20,7 @@ export default function profile() {
         <Text className='text-white text-3xl text-center mt-5 font-bold'>Th3_D5_482</Text>
         <Text className='text-xl mx-2 mt-3 text-gray-400'> "I'm an innovative software developer passionate about creating efficient, user-friendly applications. With a strong background in various programming languages, I excel at solving complex problems and turning ideas into reality. I'm committed to continuous learning and delivering top-notch solutions that exceed expectations."</Text>
         <TouchableOpacity className='h-[50px] border border-yellow-800 rounded-xl mt-8 bg-[#efe3c8] mx-2 py-3' onPress={() => router.push('/(tabs)')}>
-          <Text className='text-center text-2xl font-bold'>Sign Out</Text>
+          <Text className='text-center text-xl font-bold'>Sign Out</Text>
         </TouchableOpacity>
       </View>
     </View>

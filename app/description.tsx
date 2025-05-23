@@ -52,7 +52,7 @@ export default function description() {
           {cart ? <TouchableOpacity className='rounded-xl p-5 w-[80%] ml-[55px]' style ={{backgroundColor: Colors.inactiveTab}}onPress={()=> setCart(!cart)}>
             <Text className='text-center text-xl font-bold'>Remove from Cart</Text>
           </TouchableOpacity> : <TouchableOpacity className='bg-[#efe3c8] rounded-xl p-5 w-[80%] ml-[55px]' onPress={()=> setCart(!cart)}>
-            <Text className='text-center text-2xl font-bold'>Add to Cart</Text>
+            <Text className='text-center text-xl font-bold'>Add to Cart</Text>
           </TouchableOpacity>}
         </View>
       </View>
