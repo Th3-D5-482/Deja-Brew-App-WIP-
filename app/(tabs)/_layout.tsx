@@ -39,7 +39,7 @@ export default function _layout() {
             tabBarIcon: ({size,color}) => (
                 <Ionicons name ="heart" size={size} color={color} />
             ),
-             tabBarBadge: favoriteData.length,
+            tabBarBadge: favoriteData?.length > 0 ? favoriteData.length : undefined,
             tabBarBadgeStyle: favoriteData.length ? {
                 backgroundColor: Colors.tertiary,
                 height: 18,
