@@ -58,10 +58,26 @@ export default function cart() {
             )
           }) 
         } 
+        <Text className='text-gray-400 text-5xl'>- - - - - - - - - - - - - - - - </Text>
+        <View className='h-[70px] top-[-20px]'>
+          <View className='flex flex-row justify-between'>
+            <Text className='text-white text-xl'>Delivery Charges</Text>
+            <Text className='text-white text-xl font-bold'>$50</Text>
+          </View>
+          <View className='flex flex-row justify-between pt-4'>
+            <Text className='text-white text-xl'>Taxes</Text>
+            <Text className='text-white text-xl font-bold'>$80</Text>
+          </View>
+          <Text className='text-gray-400 text-5xl'>- - - - - - - - - - - - - - - - </Text>
+        </View>
       </View>
       </ScrollView>
-      <View>
-        <TouchableOpacity className='h-[50px] rounded-xl mb-5 bg-[#efe3c8] py-4'>
+      <View className='h-[100px'>
+        <View className='flex flex-row justify-between mb-2'>
+          <Text className='text-white text-2xl'>Grand Total</Text>
+          <Text className='text-white text-2xl font-bold'>$150</Text>
+        </View>
+        <TouchableOpacity className='h-[50px] rounded-xl mb-5 bg-[#efe3c8] py-4 mt-3'>
           <Text className='text-center text-xl font-bold'>Pay Now</Text>
         </TouchableOpacity>
       </View>
