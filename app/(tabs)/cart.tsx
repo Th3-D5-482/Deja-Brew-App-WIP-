@@ -72,6 +72,7 @@ export default function cart() {
         </View>
       </View>
       </ScrollView>
+      <Text className='text-gray-400 text-5xl'>- - - - - - - - - - - - - - - - </Text>
       <View className='h-[100px'>
         <View className='flex flex-row justify-between mb-2'>
           <Text className='text-white text-2xl'>Grand Total</Text>
