@@ -3,7 +3,7 @@ import { firebaseConfig } from '@/firebaseConfig'
 import { Ionicons } from '@expo/vector-icons'
 import { router, useLocalSearchParams } from 'expo-router'
 import { initializeApp } from 'firebase/app'
-import { get, getDatabase, ref, set } from 'firebase/database'
+import { getDatabase } from 'firebase/database'
 import React, { useState } from 'react'
 import { Image, ScrollView, Text, TouchableOpacity, View } from 'react-native'
 
@@ -11,30 +11,11 @@ export default function description() {
   const {image,name,price,ratings,description,subTitle} = useLocalSearchParams();
   const [favorite,setFavorite] = useState(false);
   const [cart,setCart] = useState(false);
-
+  const app = initializeApp(firebaseConfig);
+  const db = getDatabase(app);
 
 function addToCart() {
-  const app = initializeApp(firebaseConfig);
-  const db = getDatabase();
-  const cartRef = ref(db, 'Cart'); // Reference to the "Cart" node
-  // Check if Cart exists
-  get(cartRef)
-  .then(snapshot => {
-    if (snapshot.exists()) {
-      console.log("Cart exists:", snapshot.val()); // Debugging step
-      const cartData = snapshot.val();
-
-      if (cartData.items) {
-        console.log("Items in Cart:", cartData.items);
-      } else {
-        console.log("Cart exists but has no items.");
-      }
-    } else {
-      console.log("Cart does not exist. Creating...");
-      set(cartRef, { items: [] });
-    }
-  })
-  .catch(error => console.error("Error checking cart:", error.message));
+  
 }
 
   return (
@@ -79,9 +60,11 @@ function addToCart() {
         <View className='w-[80%] my-auto'>
           {cart ? <TouchableOpacity className='rounded-xl p-5 w-[80%] ml-[55px]' style ={{backgroundColor: Colors.inactiveTab}}onPress={()=> setCart(!cart)}>
             <Text className='text-center text-xl font-bold'>Remove from Cart</Text>
-          </TouchableOpacity> : <TouchableOpacity className='bg-[#efe3c8] rounded-xl p-5 w-[80%] ml-[55px]' onPress={(
-            addToCart
-          )=> setCart(!cart)}>
+          </TouchableOpacity> : <TouchableOpacity className='bg-[#efe3c8] rounded-xl p-5 w-[80%] ml-[55px]' onPress={()=>
+          {
+            addToCart();
+            setCart(!cart);
+          }}>
             <Text className='text-center text-xl font-bold'>Add to Cart</Text>
           </TouchableOpacity>}
         </View>
