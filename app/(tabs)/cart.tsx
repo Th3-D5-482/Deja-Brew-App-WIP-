@@ -1,30 +1,46 @@
 import { Colors } from '@/components/colors'
-import { cartData } from '@/testDatabase'
+import { firebaseConfig } from '@/firebaseConfig'
 import { Ionicons } from '@expo/vector-icons'
 import { router } from 'expo-router'
+import { initializeApp } from 'firebase/app'
+import { getDatabase, onValue, ref } from 'firebase/database'
 import React, { useEffect, useState } from 'react'
 import { Image, ScrollView, Text, TouchableOpacity, View } from 'react-native'
 
 export default function cart() {
+  interface cartItem {
+      catID: number,
+      description: string,
+      id: number,
+      image: string,
+      name: string,
+      price: number,
+      ratings: number,
+      subTitle: string,
+      numberInCart: number,
+  }
   let [total,setTotal] = useState(0);
-  useEffect(() => {
-    cartData.forEach(item => {
-      total += item.price * item.numberInCart;
-    });
-    setTotal(total+5+3);
-  },[cartData])
-  function incrementailTotal() {
-    cartData.forEach(item => {
-      total += item.price;
-    })
-    setTotal(total);
-  }
-  function decrementailTotal() {
-    cartData.forEach(item => {
-      total -= item.price;
-    })
-    setTotal(total);
-  }
+  const [cartData,setCartData] = useState<cartItem[]>();
+   useEffect(() => {
+    try {
+        const app = initializeApp(firebaseConfig);
+              const database = getDatabase(app);
+        const cartRef = ref(database, "Cart");
+        onValue(cartRef,(snapshot) => {
+          const data = snapshot.val();
+          if (data) {
+            const cartArray = Object.keys(data).map(keys =>({
+              id: keys,
+              ...data[keys],
+            }))
+            setCartData(cartArray);
+          }
+        })
+    }
+    catch (error) {
+      console.log("Firebase Error");
+    }
+   },[]);
   return (
     <View className='flex-1 px-8 pt-8 ' style ={{backgroundColor: Colors.primary}}>
       <ScrollView showsVerticalScrollIndicator ={false}>
@@ -36,20 +52,18 @@ export default function cart() {
       </View>
       <View className='mt-5 max-h-max flex flex-col gap-7'>
         {
-          cartData.map((item,index) => {
+          cartData?.map((item,index) => {
             const [price,setPrice] = useState(item.price * item.numberInCart);
             const [quantityInCart,setQuantityInCart] = useState(item.numberInCart);
             function decreaseNumberInCart() {
               if (quantityInCart != 1) {
                 setQuantityInCart(quantityInCart - 1);
                 setPrice(parseFloat(((quantityInCart - 1) * item.price).toFixed(2)));
-                decrementailTotal();
               }
             }
             function increaseNumberInCart() {
               setQuantityInCart(quantityInCart + 1);
               setPrice(parseFloat(((quantityInCart + 1) * item.price).toFixed(2)));
-              incrementailTotal();
             }
             return (
               <View className='h-[130px] rounded-xl bg-[#362c36] flex flex-row px-4 py-4' key ={index}>
@@ -105,4 +119,8 @@ export default function cart() {
       </View>
     </View>
   )
+}
+
+function initlizeApp(firebaseConfig: { apiKey: string; authDomain: string; projectId: string; storageBucket: string; messagingSenderId: string; appId: string; measurementId: string; databaseURL: string }) {
+  throw new Error('Function not implemented.')
 }
