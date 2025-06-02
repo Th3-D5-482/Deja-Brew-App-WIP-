@@ -106,7 +106,7 @@ export default function index() {
             { cappuccino == 1 && 
                 drink.filter(item => item.catID === 0).slice(0,6).map((item,index) => {
                   return (
-                    <TouchableOpacity onPress = {() => router.push({pathname: "/description",params: {image: item.image,name: item.name, price: item.price, ratings: item.ratings, description: item.description, subTitle: item.subTitle}})} key={index} className='w-[48%] h-[300px] bg-[#362c36] px-5 rounded-xl py-5 mt-5'>
+                    <TouchableOpacity onPress = {() => router.push({pathname: "/description",params: {image: item.image,name: item.name, price: item.price, ratings: item.ratings, description: item.description, subTitle: item.subTitle,id: item.id,catId: item.catID}})} key={index} className='w-[48%] h-[300px] bg-[#362c36] px-5 rounded-xl py-5 mt-5'>
                       <Image source={{uri:item.image}} style={{ width: 120, height: 150, objectFit: "cover"}} className='mx-auto'/>
                       <Text className='mt-3 text-white text-xl md:mx-auto h-[50px]'>{item.name}</Text>
                       <View className='w-full mt-3 h-10 bg-[#463d46] rounded-xl flex flex-row justify-between'>

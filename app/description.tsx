@@ -3,19 +3,33 @@ import { firebaseConfig } from '@/firebaseConfig'
 import { Ionicons } from '@expo/vector-icons'
 import { router, useLocalSearchParams } from 'expo-router'
 import { initializeApp } from 'firebase/app'
-import { getDatabase } from 'firebase/database'
+import { getDatabase, ref, set } from 'firebase/database'
 import React, { useState } from 'react'
 import { Image, ScrollView, Text, TouchableOpacity, View } from 'react-native'
 
 export default function description() {
-  const {image,name,price,ratings,description,subTitle} = useLocalSearchParams();
+  const {image,name,price,ratings,description,subTitle,id,catId} = useLocalSearchParams();
   const [favorite,setFavorite] = useState(false);
   const [cart,setCart] = useState(false);
   const app = initializeApp(firebaseConfig);
-  const db = getDatabase(app);
 
-function addToCart() {
-  
+function createCartTable() {
+  const database = getDatabase(app);
+  const cartRef = ref(database, 'Cart');
+
+  const sampleItem = {
+    id: id,
+    catID: catId,
+    name: name,
+    description: description,
+    image: image,
+    numberInCart: 1,
+    price: price,
+    ratings: ratings,
+    subTitle: ratings,
+  };
+
+  set(cartRef, { [Number(sampleItem.id)]: sampleItem });
 }
 
   return (
@@ -62,7 +76,7 @@ function addToCart() {
             <Text className='text-center text-xl font-bold'>Remove from Cart</Text>
           </TouchableOpacity> : <TouchableOpacity className='bg-[#efe3c8] rounded-xl p-5 w-[80%] ml-[55px]' onPress={()=>
           {
-            addToCart();
+            createCartTable();
             setCart(!cart);
           }}>
             <Text className='text-center text-xl font-bold'>Add to Cart</Text>
