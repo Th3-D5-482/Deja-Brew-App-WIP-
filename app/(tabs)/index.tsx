@@ -31,16 +31,14 @@ export default function index() {
       const app = initializeApp(firebaseConfig);
       const database = getDatabase(app);
       const drinkRef = ref(database,"Drinks");
-      onValue(drinkRef,(snapshot) => {
+      const unscribe = onValue (drinkRef, (snapshot) => {
         const data = snapshot.val();
-        if (data) {
-          const drinkArray = Object.keys(data).map(keys => ({
-            id:keys,
-            ...data[keys],
-          }))
-          setDrink(drinkArray);
-        }
-      })
+        setDrink(data ? Object.keys(data).map(key => ({
+          id : key, 
+          ...data[key],
+        })): []);
+      } )
+      return () => unscribe();
     } 
     catch(error) {
       console.log("Firebase Error");

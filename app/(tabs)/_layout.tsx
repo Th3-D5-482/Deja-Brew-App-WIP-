@@ -1,9 +1,33 @@
-import { Colors } from '@/components/colors'
-import { Ionicons } from '@expo/vector-icons'
-import { Tabs } from 'expo-router'
-import React from 'react'
+import { Colors } from '@/components/colors';
+import { firebaseConfig } from '@/firebaseConfig';
+import { Ionicons } from '@expo/vector-icons';
+import { Tabs } from 'expo-router';
+import { initializeApp } from 'firebase/app';
+import { getDatabase, onValue, ref } from 'firebase/database';
+import React, { useEffect, useState } from 'react';
 
+interface cartList {
+  id: string;
+}
 export default function _layout() {
+    const [cartData,setCartData] = useState<cartList[]>();
+    useEffect(() => {
+        try {
+            const app = initializeApp(firebaseConfig);
+            const database = getDatabase(app);
+            const cartRef = ref(database,"Cart");
+            const unscribe = onValue(cartRef,(snapshot) => {
+                const data = snapshot.val();
+                setCartData(data ? Object.keys(data).map(key => ({
+                    id: key,
+                    ...data[key],
+                })): []);
+            })
+            return () => unscribe();
+        }
+        catch (error) {
+            console.log("Firebase Error");  }
+    },[]);
   return (
     <Tabs screenOptions={{
         headerShown: false,
@@ -27,7 +51,7 @@ export default function _layout() {
             tabBarIcon: ({size,color}) => (
                 <Ionicons name ="cart" size={size} color={color} />
             ),
-            tabBarBadge: undefined,
+            tabBarBadge: (cartData?.length ?? 0) > 0 ? cartData!.length : undefined,
             tabBarBadgeStyle:{
                 backgroundColor: Colors.tertiary,
                 height: 18,

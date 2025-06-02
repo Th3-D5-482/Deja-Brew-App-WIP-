@@ -29,20 +29,19 @@ export default function cart() {
       const app = initializeApp(firebaseConfig);
       const database = getDatabase(app);
       const cartRef = ref(database, "Cart");
-        onValue(cartRef,(snapshot) => {
-          const data = snapshot.val();
-          if (data) {
-           const cartArray = Object.keys(data)
-          .map(key => (data[key] ? {id:key, ...data[key]}:null))
-           .filter(item => item !== null);
-            setCartData(cartArray);
-          }
-        })
+      const unscribe = onValue (cartRef, (snapshot) => {
+        const data = snapshot.val();
+        setCartData(data ? Object.keys(data).map(key => ({
+          id: key,
+          ...data[key],
+        })): []);
+      })
+      return () => unscribe();
     }
     catch (error) {
       console.log("Firebase Error");
     }
-   },[]);
+  },[]);
   function increaseItem(itemId: number, quantityInCart: number) {
     const app = initializeApp(firebaseConfig);
     const database = getDatabase(app);
@@ -51,6 +50,8 @@ export default function cart() {
   }
   return (
     <View className='flex-1 px-8 pt-8 ' style={{ backgroundColor: Colors.primary }}>
+      { (cartData?.length ?? 0) > 0 ? (
+        <>
           <ScrollView showsVerticalScrollIndicator={false}>
             <View className='h-[40px] flex flex-row'>
               <TouchableOpacity onPress={() => router.push('/(tabs)')} className='py-1'>
@@ -115,6 +116,10 @@ export default function cart() {
               <Text className='text-center text-xl font-bold'>Pay Now</Text>
             </TouchableOpacity>
           </View>
+          </>
+          ): <Text className='text-white text-2xl font-bold  my-auto text-center'>Your Cart is Empty</Text>
+        }
     </View>
   )
-}
+} 
+
