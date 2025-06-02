@@ -3,7 +3,7 @@ import { firebaseConfig } from '@/firebaseConfig'
 import { Ionicons } from '@expo/vector-icons'
 import { router } from 'expo-router'
 import { initializeApp } from 'firebase/app'
-import { getDatabase, onValue, ref } from 'firebase/database'
+import { getDatabase, onValue, ref, update } from 'firebase/database'
 import React, { useEffect, useState } from 'react'
 import { Image, ScrollView, Text, TouchableOpacity, View } from 'react-native'
 
@@ -24,11 +24,11 @@ export default function cart() {
   const [cartData,setCartData] = useState<cartItem[]>();
   let [price, setPrice] = useState(0);
   let [quantityInCart, setQuantityInCart] = useState(0);
+  const app = initializeApp(firebaseConfig);
+  const database = getDatabase(app);
   useEffect(() => {
     try {
-      const app = initializeApp(firebaseConfig);
-      const database = getDatabase(app);
-        const cartRef = ref(database, "Cart");
+      const cartRef = ref(database, "Cart");
         onValue(cartRef,(snapshot) => {
           const data = snapshot.val();
           if (data) {
@@ -44,6 +44,10 @@ export default function cart() {
       console.log("Firebase Error");
     }
    },[]);
+  function increaseItem(itemId: number, quantityInCart: number) {
+    const cartRef1 = ref(database,"Cart");
+    update(cartRef1, { numberInCart: quantityInCart + 1 });
+  }
   return (
     <View className='flex-1 px-8 pt-8 ' style={{ backgroundColor: Colors.primary }}>
           <ScrollView showsVerticalScrollIndicator={false}>
@@ -56,6 +60,8 @@ export default function cart() {
             <View className='mt-5 max-h-max flex flex-col gap-7'>
               {
                 cartData?.map((item, index) => {
+                  price = Number(item.price);
+                  quantityInCart = Number(item.numberInCart);
                   return (
                     <View className='h-[130px] rounded-xl bg-[#362c36] flex flex-row px-4 py-4' key={index}>
                       <View className='w-[32%] rounded-xl'>
@@ -74,7 +80,7 @@ export default function cart() {
                               <Ionicons name="remove" size={26} />
                             </TouchableOpacity>
                             <Text className='text-2xl text-white'>{quantityInCart}</Text>
-                            <TouchableOpacity className='w-7 h-7 bg-[#efe3c8]'>
+                            <TouchableOpacity className='w-7 h-7 bg-[#efe3c8]' onPress={() => increaseItem(item.id,item.numberInCart)}>
                               <Ionicons name="add" size={26} />
                             </TouchableOpacity>
                           </View>
