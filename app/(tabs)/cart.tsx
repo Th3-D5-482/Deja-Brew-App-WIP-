@@ -22,7 +22,9 @@ interface cartItem {
 export default function cart() {
   let [total,setTotal] = useState(0);
   const [cartData,setCartData] = useState<cartItem[]>();
-   useEffect(() => {
+  let [price, setPrice] = useState(0);
+  let [quantityInCart, setQuantityInCart] = useState(0);
+  useEffect(() => {
     try {
       const app = initializeApp(firebaseConfig);
       const database = getDatabase(app);
@@ -54,18 +56,6 @@ export default function cart() {
             <View className='mt-5 max-h-max flex flex-col gap-7'>
               {
                 cartData?.map((item, index) => {
-                  const [price, setPrice] = useState(item.price * item.numberInCart);
-                  const [quantityInCart, setQuantityInCart] = useState(item.numberInCart);
-                  function decreaseNumberInCart() {
-                    if (quantityInCart != 1) {
-                      setQuantityInCart(quantityInCart - 1);
-                      setPrice(parseFloat(((quantityInCart - 1) * item.price).toFixed(2)));
-                    }
-                  }
-                  function increaseNumberInCart() {
-                    setQuantityInCart(quantityInCart + 1);
-                    setPrice(parseFloat(((quantityInCart + 1) * item.price).toFixed(2)));
-                  }
                   return (
                     <View className='h-[130px] rounded-xl bg-[#362c36] flex flex-row px-4 py-4' key={index}>
                       <View className='w-[32%] rounded-xl'>
@@ -80,11 +70,11 @@ export default function cart() {
                         <View className='flex flex-row justify-between mt-1'>
                           <Text className='text-white font-bold text-2xl'>${price.toFixed(2)}</Text>
                           <View className='w-[50%] flex flex-row justify-between'>
-                            <TouchableOpacity className='w-7 h-7 bg-[#efe3c8]' onPress={decreaseNumberInCart}>
+                            <TouchableOpacity className='w-7 h-7 bg-[#efe3c8]'>
                               <Ionicons name="remove" size={26} />
                             </TouchableOpacity>
                             <Text className='text-2xl text-white'>{quantityInCart}</Text>
-                            <TouchableOpacity className='w-7 h-7 bg-[#efe3c8]' onPress={increaseNumberInCart}>
+                            <TouchableOpacity className='w-7 h-7 bg-[#efe3c8]'>
                               <Ionicons name="add" size={26} />
                             </TouchableOpacity>
                           </View>
