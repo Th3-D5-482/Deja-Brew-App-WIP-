@@ -26,7 +26,7 @@ function createCartTable() {
     numberInCart: 1,
     price: price,
     ratings: ratings,
-    subTitle: ratings,
+    subTitle: subTitle,
   };
 
   set(cartRef, { [Number(sampleItem.id)]: sampleItem });

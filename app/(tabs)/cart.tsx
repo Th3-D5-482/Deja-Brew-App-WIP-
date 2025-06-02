@@ -24,18 +24,17 @@ export default function cart() {
   const [cartData,setCartData] = useState<cartItem[]>();
   let [price, setPrice] = useState(0);
   let [quantityInCart, setQuantityInCart] = useState(0);
-  const app = initializeApp(firebaseConfig);
-  const database = getDatabase(app);
   useEffect(() => {
     try {
+      const app = initializeApp(firebaseConfig);
+      const database = getDatabase(app);
       const cartRef = ref(database, "Cart");
         onValue(cartRef,(snapshot) => {
           const data = snapshot.val();
           if (data) {
-            const cartArray = Object.keys(data).map(keys =>({
-              id: keys,
-              ...data[keys],
-            }))
+           const cartArray = Object.keys(data)
+          .map(key => (data[key] ? {id:key, ...data[key]}:null))
+           .filter(item => item !== null);
             setCartData(cartArray);
           }
         })
@@ -45,6 +44,8 @@ export default function cart() {
     }
    },[]);
   function increaseItem(itemId: number, quantityInCart: number) {
+    const app = initializeApp(firebaseConfig);
+    const database = getDatabase(app);
     const cartRef1 = ref(database,"Cart");
     update(cartRef1, { numberInCart: quantityInCart + 1 });
   }
