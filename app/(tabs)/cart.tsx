@@ -7,24 +7,25 @@ import { getDatabase, onValue, ref } from 'firebase/database'
 import React, { useEffect, useState } from 'react'
 import { Image, ScrollView, Text, TouchableOpacity, View } from 'react-native'
 
+interface cartItem {
+  catID: number;
+  description: string;
+  id: number;
+  image: string;
+  name: string;
+  price: number;
+  ratings: number;
+  subTitle: string;
+  numberInCart: number;
+}
+
 export default function cart() {
-  interface cartItem {
-      catID: number,
-      description: string,
-      id: number,
-      image: string,
-      name: string,
-      price: number,
-      ratings: number,
-      subTitle: string,
-      numberInCart: number,
-  }
   let [total,setTotal] = useState(0);
   const [cartData,setCartData] = useState<cartItem[]>();
    useEffect(() => {
     try {
-        const app = initializeApp(firebaseConfig);
-              const database = getDatabase(app);
+      const app = initializeApp(firebaseConfig);
+      const database = getDatabase(app);
         const cartRef = ref(database, "Cart");
         onValue(cartRef,(snapshot) => {
           const data = snapshot.val();
@@ -43,8 +44,6 @@ export default function cart() {
    },[]);
   return (
     <View className='flex-1 px-8 pt-8 ' style={{ backgroundColor: Colors.primary }}>
-      {cartData?.length === 0 ? (
-        <>
           <ScrollView showsVerticalScrollIndicator={false}>
             <View className='h-[40px] flex flex-row'>
               <TouchableOpacity onPress={() => router.push('/(tabs)')} className='py-1'>
@@ -119,8 +118,6 @@ export default function cart() {
               <Text className='text-center text-xl font-bold'>Pay Now</Text>
             </TouchableOpacity>
           </View>
-        </>
-      ) : <Text className='text-3xl text-white font-bold text-center my-auto'>Nothing added to Cart</Text>}
     </View>
   )
 }
