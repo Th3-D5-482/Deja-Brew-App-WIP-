@@ -25,22 +25,17 @@ export default function cart() {
   let [price, setPrice] = useState(0);
   let [quantityInCart, setQuantityInCart] = useState(0);
   useEffect(() => {
-    try {
-      const app = initializeApp(firebaseConfig);
+    const app = initializeApp(firebaseConfig);
       const database = getDatabase(app);
       const cartRef = ref(database, "Cart");
-      const unscribe = onValue (cartRef, (snapshot) => {
+      const reRun = onValue (cartRef, (snapshot) => {
         const data = snapshot.val();
         setCartData(data ? Object.keys(data).map(key => ({
           id: key,
           ...data[key],
         })): []);
       })
-      return () => unscribe();
-    }
-    catch (error) {
-      console.log("Firebase Error");
-    }
+      return () => reRun();
   },[]);
   function increaseItem(itemId: number, quantityInCart: number) {
     const app = initializeApp(firebaseConfig);

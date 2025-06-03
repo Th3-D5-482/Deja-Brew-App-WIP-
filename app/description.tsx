@@ -3,34 +3,46 @@ import { firebaseConfig } from '@/firebaseConfig'
 import { Ionicons } from '@expo/vector-icons'
 import { router, useLocalSearchParams } from 'expo-router'
 import { initializeApp } from 'firebase/app'
-import { getDatabase, ref, set } from 'firebase/database'
+import { getDatabase, push, ref, set } from 'firebase/database'
 import React, { useState } from 'react'
 import { Image, ScrollView, Text, TouchableOpacity, View } from 'react-native'
+
+interface coffeeItem {
+  id: number;
+  catID: number;
+  name: string,
+  description: string,
+  image: string,
+  numberInCart: 1,
+  price: number,
+  ratings: number,
+  subTitle: string,
+}
 
 export default function description() {
   const {image,name,price,ratings,description,subTitle,id,catId} = useLocalSearchParams();
   const [favorite,setFavorite] = useState(false);
   const [cart,setCart] = useState(false);
-  const app = initializeApp(firebaseConfig);
+  const [cartData,setCartData] = useState<coffeeItem[]>();
 
-function createCartTable() {
-  const database = getDatabase(app);
-  const cartRef = ref(database, 'Cart');
-
-  const sampleItem = {
-    id: id,
-    catID: catId,
-    name: name,
-    description: description,
-    image: image,
-    numberInCart: 1,
-    price: price,
-    ratings: ratings,
-    subTitle: subTitle,
-  };
-
-  set(cartRef, { [Number(sampleItem.id)]: sampleItem });
-}
+  function createCartTable() {
+    const app = initializeApp(firebaseConfig);
+    const database = getDatabase(app);
+    const cartRef = ref(database, 'Cart');
+    const sampleItem = {
+      id: id,
+      catID: catId,
+      name: name,
+      description: description,
+      image: image,
+      numberInCart: 1,
+      price: price,
+      ratings: ratings,
+      subTitle: subTitle,
+    };
+    const newCartRef = push(cartRef);
+    set(newCartRef, sampleItem);  
+  }
 
   return (
     <View className ='flex-1 px-8 pt-5' style = {{backgroundColor: Colors.primary}}>

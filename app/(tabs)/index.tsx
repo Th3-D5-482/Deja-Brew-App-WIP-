@@ -27,22 +27,17 @@ export default function index() {
   const [drink,setDrink] = useState<coffeeItem[]>([]);
 
   useEffect(()=>{
-    try {
-      const app = initializeApp(firebaseConfig);
-      const database = getDatabase(app);
-      const drinkRef = ref(database,"Drinks");
-      const unscribe = onValue (drinkRef, (snapshot) => {
-        const data = snapshot.val();
-        setDrink(data ? Object.keys(data).map(key => ({
-          id : key, 
-          ...data[key],
-        })): []);
-      } )
-      return () => unscribe();
-    } 
-    catch(error) {
-      console.log("Firebase Error");
-    }
+    const app = initializeApp(firebaseConfig);
+    const database = getDatabase(app);
+    const drinkRef = ref(database,"Drinks");
+    const reRun = onValue (drinkRef, (snapshot) => {
+      const data = snapshot.val();
+      setDrink(data ? Object.keys(data).map(key => ({
+        id : key, 
+        ...data[key],
+      })): []);
+    } )
+    return () => reRun();
   },[])
 
   function funCappuccino() {
