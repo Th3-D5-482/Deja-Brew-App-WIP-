@@ -16,14 +16,14 @@ export default function _layout() {
             const app = initializeApp(firebaseConfig);
             const database = getDatabase(app);
             const cartRef = ref(database,"Cart");
-            const unscribe = onValue(cartRef,(snapshot) => {
+            const reRun = onValue(cartRef,(snapshot) => {
                 const data = snapshot.val();
                 setCartData(data ? Object.keys(data).map(key => ({
                     id: key,
                     ...data[key],
                 })): []);
             })
-            return () => unscribe();
+            return () => reRun();
         }
         catch (error) {
             console.log("Firebase Error");  }

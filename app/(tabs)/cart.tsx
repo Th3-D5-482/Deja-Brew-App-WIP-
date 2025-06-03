@@ -24,6 +24,7 @@ export default function cart() {
   const [cartData,setCartData] = useState<cartItem[]>();
   let [price, setPrice] = useState(0);
   let [quantityInCart, setQuantityInCart] = useState(0);
+
   useEffect(() => {
     const app = initializeApp(firebaseConfig);
       const database = getDatabase(app);
@@ -37,12 +38,14 @@ export default function cart() {
       })
       return () => reRun();
   },[]);
-  function increaseItem(itemId: number, quantityInCart: number) {
+
+  function incrementCart() {
     const app = initializeApp(firebaseConfig);
     const database = getDatabase(app);
-    const cartRef1 = ref(database,"Cart");
-    update(cartRef1, { numberInCart: quantityInCart + 1 });
+    const cartRef = ref(database, "Cart");
+    update(cartRef,{numberInCart: quantityInCart + 1})
   }
+  
   return (
     <View className='flex-1 px-8 pt-8 ' style={{ backgroundColor: Colors.primary }}>
       { (cartData?.length ?? 0) > 0 ? (
@@ -77,7 +80,7 @@ export default function cart() {
                               <Ionicons name="remove" size={26} />
                             </TouchableOpacity>
                             <Text className='text-2xl text-white'>{quantityInCart}</Text>
-                            <TouchableOpacity className='w-7 h-7 bg-[#efe3c8]' onPress={() => increaseItem(item.id,item.numberInCart)}>
+                            <TouchableOpacity className='w-7 h-7 bg-[#efe3c8]' onPress ={() => incrementCart()}>
                               <Ionicons name="add" size={26} />
                             </TouchableOpacity>
                           </View>
