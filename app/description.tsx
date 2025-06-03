@@ -33,7 +33,7 @@ export default function description() {
   function addToCart() {
     const app = initializeApp(firebaseConfig);
     const database = getDatabase(app);
-    const cartRef = ref(database, 'Cart');
+    const cartRef = ref(database, "Cart");
     const sampleItem = {
       id: id,
       catID: catId,

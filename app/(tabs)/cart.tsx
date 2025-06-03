@@ -3,7 +3,7 @@ import { firebaseConfig } from '@/firebaseConfig'
 import { Ionicons } from '@expo/vector-icons'
 import { router } from 'expo-router'
 import { initializeApp } from 'firebase/app'
-import { getDatabase, onValue, ref, update } from 'firebase/database'
+import { getDatabase, onValue, ref, remove, update } from 'firebase/database'
 import React, { useEffect, useState } from 'react'
 import { Image, ScrollView, Text, TouchableOpacity, View } from 'react-native'
 
@@ -74,6 +74,22 @@ export default function cart() {
     },{onlyOnce: true});
   }
 
+  function deleteCart(targetID: String) {
+    const app = initializeApp(firebaseConfig);
+    const database = getDatabase(app);
+    const cartRef = ref(database,"Cart");
+    onValue(cartRef,(snapshot) => {
+      const data = snapshot.val();
+      if (data) {
+        const itemKey = Object.keys(data).find(key => data[key].id === targetID);
+        if (itemKey) {
+          const itemRef = ref(database, `Cart/${itemKey}`);
+          remove(itemRef);
+        }
+      }
+    })
+  }
+
   return (
     <View className='flex-1 px-8 pt-8 ' style={{ backgroundColor: Colors.primary }}>
       { (cartData?.length ?? 0) > 0 ? (
@@ -98,7 +114,7 @@ export default function cart() {
                       <View className='w-[68%] flex flex-col gap-2 pl-2'>
                         <View className='h-[30px] flex flex-row justify-between'>
                           <Text className='text-white text-xl'>{item.name}</Text>
-                          <Ionicons name="trash" size={26} color={Colors.delete} />
+                          <Ionicons name="trash" size={26} color={Colors.delete} onPress={() => deleteCart(String(item.id))} />
                         </View>
                         <Text className='text-gray-400'>{item.subTitle}</Text>
                         <View className='flex flex-row justify-between mt-1'>
