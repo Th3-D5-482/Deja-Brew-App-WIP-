@@ -40,21 +40,40 @@ export default function cart() {
   },[]);
 
 
-function incrementCart(targetId: string) {
-  const app = initializeApp(firebaseConfig);
-  const database = getDatabase(app);
-  const cartRef = ref(database, "Cart");
-  onValue(cartRef,(snapshot) => {
-    const data = snapshot.val();
-    const itemKey = Object.keys(data).find(key => data[key].id === targetId);
-    if (itemKey) {
-      const itemRef = ref(database, `Cart/${itemKey}`);
-      const newQuantity = (data[itemKey].numberInCart) + 1;
-      update(itemRef, {numberInCart: newQuantity});
-    }
-  },{ onlyOnce: true });
-}
+  function incrementCart(targetID: string) {
+    const app = initializeApp(firebaseConfig);
+    const database = getDatabase(app);
+    const cartRef = ref(database, "Cart");
+    onValue(cartRef, (snapshot) => {
+      const data = snapshot.val();
+      if (data) {
+        const itemKey = Object.keys(data).find(key => data[key].id === targetID);
+        if (itemKey) {
+          const itemRef = ref(database,`Cart/${itemKey}`);
+          const newNumberInCart = (data[itemKey].numberInCart)+1;
+          update(itemRef,{numberInCart: newNumberInCart})
+        }
+      }
+    }, { onlyOnce: true });
+  }
   
+  function decrementCart(targetID: string) {
+    const app = initializeApp(firebaseConfig);
+    const database = getDatabase(app);
+    const cartRef = ref(database,"Cart");
+    onValue(cartRef, (snapshot) => {
+      const data = snapshot.val();
+      if (data) {
+        const itemKey = Object.keys(data).find(key => data[key].id === targetID);
+        if (itemKey && data[itemKey].numberInCart > 1) {
+          const itemRef = ref(database, `Cart/${itemKey}`);
+          const newNumberInCart = (data[itemKey].numberInCart) - 1;
+          update(itemRef, { numberInCart: newNumberInCart })
+        }
+      }
+    },{onlyOnce: true});
+  }
+
   return (
     <View className='flex-1 px-8 pt-8 ' style={{ backgroundColor: Colors.primary }}>
       { (cartData?.length ?? 0) > 0 ? (
@@ -85,7 +104,7 @@ function incrementCart(targetId: string) {
                         <View className='flex flex-row justify-between mt-1'>
                           <Text className='text-white font-bold text-2xl'>${price.toFixed(2)}</Text>
                           <View className='w-[50%] flex flex-row justify-between'>
-                            <TouchableOpacity className='w-7 h-7 bg-[#efe3c8]'>
+                            <TouchableOpacity className='w-7 h-7 bg-[#efe3c8]' onPress={() => decrementCart(String(item.id))}>
                               <Ionicons name="remove" size={26} />
                             </TouchableOpacity>
                             <Text className='text-2xl text-white'>{quantityInCart}</Text>
