@@ -44,22 +44,15 @@ function incrementCart(targetId: string) {
   const app = initializeApp(firebaseConfig);
   const database = getDatabase(app);
   const cartRef = ref(database, "Cart");
-  onValue(cartRef, (snapshot) => {
-    if (snapshot.exists()) {
-      const data = snapshot.val();
-      
-      // Find the correct Firebase key for the item with the given id
-      const itemKey = Object.keys(data).find(key => data[key].id === targetId);
-
-      if (itemKey) {
-        const itemRef = ref(database, `Cart/${itemKey}`);
-        const newQuantity = (data[itemKey].numberInCart || 0) + 1;
-
-        // Update only the numberInCart for this specific item
-        update(itemRef, { numberInCart: newQuantity });
-      }
+  onValue(cartRef,(snapshot) => {
+    const data = snapshot.val();
+    const itemKey = Object.keys(data).find(key => data[key].id === targetId);
+    if (itemKey) {
+      const itemRef = ref(database, `Cart/${itemKey}`);
+      const newQuantity = (data[itemKey].numberInCart) + 1;
+      update(itemRef, {numberInCart: newQuantity});
     }
-  }, { onlyOnce: true }); // Ensures we don’t keep listening for changes
+  },{ onlyOnce: true });
 }
   
   return (
