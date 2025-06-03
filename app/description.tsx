@@ -30,7 +30,7 @@ export default function description() {
     return () => reRun();
   },[]);
 
-  function createCartTable() {
+  function addToCart() {
     const app = initializeApp(firebaseConfig);
     const database = getDatabase(app);
     const cartRef = ref(database, 'Cart');
@@ -92,7 +92,7 @@ export default function description() {
           { cartData?.some(item => String(item.id) === String(id)) ? <TouchableOpacity className='rounded-xl p-5 w-[80%] ml-[55px]' style ={{backgroundColor: Colors.inactiveTab}}>
             <Text className='text-center text-xl font-bold'>Remove from Cart</Text>
           </TouchableOpacity> : 
-          <TouchableOpacity className='bg-[#efe3c8] rounded-xl p-5 w-[80%] ml-[55px]' onPress={()=>  createCartTable()}>
+          <TouchableOpacity className='bg-[#efe3c8] rounded-xl p-5 w-[80%] ml-[55px]' onPress={()=>  addToCart()}>
             <Text className='text-center text-xl font-bold'>Add to Cart</Text>
           </TouchableOpacity>}
         </View>

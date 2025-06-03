@@ -39,10 +39,10 @@ export default function cart() {
       return () => reRun();
   },[]);
 
-  function incrementCart() {
+  function incrementCart(itemID: string) {
     const app = initializeApp(firebaseConfig);
     const database = getDatabase(app);
-    const cartRef = ref(database, "Cart");
+    const cartRef = ref(database, `Cart/${itemID}`);
     update(cartRef,{numberInCart: quantityInCart + 1})
   }
   
@@ -80,7 +80,7 @@ export default function cart() {
                               <Ionicons name="remove" size={26} />
                             </TouchableOpacity>
                             <Text className='text-2xl text-white'>{quantityInCart}</Text>
-                            <TouchableOpacity className='w-7 h-7 bg-[#efe3c8]' onPress ={() => incrementCart()}>
+                            <TouchableOpacity className='w-7 h-7 bg-[#efe3c8]' onPress ={() => incrementCart(String(item.id))}>
                               <Ionicons name="add" size={26} />
                             </TouchableOpacity>
                           </View>
