@@ -30,14 +30,13 @@ export default function index() {
     const app = initializeApp(firebaseConfig);
     const database = getDatabase(app);
     const drinkRef = ref(database,"Drinks");
-    const reRun = onValue (drinkRef, (snapshot) => {
+    onValue (drinkRef, (snapshot) => {
       const data = snapshot.val();
       setDrink(data ? Object.keys(data).map(key => ({
         id : key, 
         ...data[key],
       })): []);
     } )
-    return () => reRun();
   },[])
 
   function funCappuccino() {

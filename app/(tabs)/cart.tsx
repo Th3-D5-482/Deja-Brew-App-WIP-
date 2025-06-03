@@ -39,12 +39,28 @@ export default function cart() {
       return () => reRun();
   },[]);
 
-  function incrementCart(itemID: string) {
-    const app = initializeApp(firebaseConfig);
-    const database = getDatabase(app);
-    const cartRef = ref(database, `Cart/${itemID}`);
-    update(cartRef,{numberInCart: quantityInCart + 1})
-  }
+
+function incrementCart(targetId: string) {
+  const app = initializeApp(firebaseConfig);
+  const database = getDatabase(app);
+  const cartRef = ref(database, "Cart");
+  onValue(cartRef, (snapshot) => {
+    if (snapshot.exists()) {
+      const data = snapshot.val();
+      
+      // Find the correct Firebase key for the item with the given id
+      const itemKey = Object.keys(data).find(key => data[key].id === targetId);
+
+      if (itemKey) {
+        const itemRef = ref(database, `Cart/${itemKey}`);
+        const newQuantity = (data[itemKey].numberInCart || 0) + 1;
+
+        // Update only the numberInCart for this specific item
+        update(itemRef, { numberInCart: newQuantity });
+      }
+    }
+  }, { onlyOnce: true }); // Ensures we don’t keep listening for changes
+}
   
   return (
     <View className='flex-1 px-8 pt-8 ' style={{ backgroundColor: Colors.primary }}>
