@@ -3,27 +3,32 @@ import { firebaseConfig } from '@/firebaseConfig'
 import { Ionicons } from '@expo/vector-icons'
 import { router, useLocalSearchParams } from 'expo-router'
 import { initializeApp } from 'firebase/app'
-import { getDatabase, push, ref, set } from 'firebase/database'
-import React, { useState } from 'react'
+import { getDatabase, onValue, push, ref, set } from 'firebase/database'
+import React, { useEffect, useState } from 'react'
 import { Image, ScrollView, Text, TouchableOpacity, View } from 'react-native'
 
 interface coffeeItem {
   id: number;
-  catID: number;
-  name: string,
-  description: string,
-  image: string,
-  numberInCart: 1,
-  price: number,
-  ratings: number,
-  subTitle: string,
 }
 
 export default function description() {
   const {image,name,price,ratings,description,subTitle,id,catId} = useLocalSearchParams();
   const [favorite,setFavorite] = useState(false);
-  const [cart,setCart] = useState(false);
   const [cartData,setCartData] = useState<coffeeItem[]>();
+
+  useEffect(() => {
+    const app = initializeApp(firebaseConfig);
+    const database = getDatabase(app);
+    const cartRef = ref(database, "Cart");
+    const reRun = onValue (cartRef, (snapshot) => {
+      const data = snapshot.val();
+      setCartData(data ? Object.keys(data).map(key => ({
+        id: key,
+        ...data[key],
+      })): [])
+    })
+    return () => reRun();
+  },[]);
 
   function createCartTable() {
     const app = initializeApp(firebaseConfig);
@@ -84,13 +89,10 @@ export default function description() {
           <Text className='text-white text-2xl mt-2 font-bold'>${price}</Text>
         </View>
         <View className='w-[80%] my-auto'>
-          {cart ? <TouchableOpacity className='rounded-xl p-5 w-[80%] ml-[55px]' style ={{backgroundColor: Colors.inactiveTab}}onPress={()=> setCart(!cart)}>
+          { cartData?.some(item => String(item.id) === String(id)) ? <TouchableOpacity className='rounded-xl p-5 w-[80%] ml-[55px]' style ={{backgroundColor: Colors.inactiveTab}}>
             <Text className='text-center text-xl font-bold'>Remove from Cart</Text>
-          </TouchableOpacity> : <TouchableOpacity className='bg-[#efe3c8] rounded-xl p-5 w-[80%] ml-[55px]' onPress={()=>
-          {
-            createCartTable();
-            setCart(!cart);
-          }}>
+          </TouchableOpacity> : 
+          <TouchableOpacity className='bg-[#efe3c8] rounded-xl p-5 w-[80%] ml-[55px]' onPress={()=>  createCartTable()}>
             <Text className='text-center text-xl font-bold'>Add to Cart</Text>
           </TouchableOpacity>}
         </View>
