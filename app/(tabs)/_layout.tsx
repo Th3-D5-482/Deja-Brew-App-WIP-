@@ -12,21 +12,17 @@ interface cartList {
 export default function _layout() {
     const [cartData,setCartData] = useState<cartList[]>();
     useEffect(() => {
-        try {
-            const app = initializeApp(firebaseConfig);
-            const database = getDatabase(app);
-            const cartRef = ref(database,"Cart");
-            const reRun = onValue(cartRef,(snapshot) => {
-                const data = snapshot.val();
-                setCartData(data ? Object.keys(data).map(key => ({
-                    id: key,
-                    ...data[key],
-                })): []);
-            })
-            return () => reRun();
-        }
-        catch (error) {
-            console.log("Firebase Error");  }
+        const app = initializeApp(firebaseConfig);
+        const database = getDatabase(app);
+        const cartRef = ref(database,"Cart");
+        const reRun = onValue(cartRef,(snapshot) => {
+            const data = snapshot.val();
+            setCartData(data ? Object.keys(data).map(key => ({
+                id: key,
+                ...data[key],
+            })): []);
+        })
+        return () => reRun();
     },[]);
   return (
     <Tabs screenOptions={{
