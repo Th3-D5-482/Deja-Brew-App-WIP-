@@ -3,8 +3,9 @@ import { firebaseConfig } from '@/firebaseConfig'
 import { Ionicons } from '@expo/vector-icons'
 import { router } from 'expo-router'
 import { initializeApp } from 'firebase/app'
-import { getDatabase, onValue, ref, remove, update } from 'firebase/database'
-import React, { useEffect, useState } from 'react'
+import { get, getDatabase, onValue, ref, remove, update } from 'firebase/database'
+import * as React from 'react'
+import { useEffect, useState } from 'react'
 import { Image, ScrollView, Text, TouchableOpacity, View } from 'react-native'
 
 interface cartItem {
@@ -78,7 +79,7 @@ export default function cart() {
     const app = initializeApp(firebaseConfig);
     const database = getDatabase(app);
     const cartRef = ref(database,"Cart");
-    onValue(cartRef,(snapshot) => {
+    get(cartRef).then((snapshot) => {
       const data = snapshot.val();
       if (data) {
         const itemKey = Object.keys(data).find(key => data[key].id === targetID);
@@ -87,7 +88,7 @@ export default function cart() {
           remove(itemRef);
         }
       }
-    })
+    });
   }
 
   return (
