@@ -28,18 +28,17 @@ export default function cart() {
 
   useEffect(() => {
     const app = initializeApp(firebaseConfig);
-      const database = getDatabase(app);
-      const cartRef = ref(database, "Cart");
-      const reRun = onValue (cartRef, (snapshot) => {
-        const data = snapshot.val();
-        setCartData(data ? Object.keys(data).map(key => ({
+    const database = getDatabase(app);
+    const cartRef  = ref(database,"Cart");
+    const reRun = onValue(cartRef, (snapshot) => {
+      const data = snapshot.val();
+      setCartData(data ? Object.keys(data).map(key => ({
           id: key,
           ...data[key],
         })): []);
-      })
       return () => reRun();
-  },[]);
-
+    })
+  },[])
 
   function incrementCart(targetID: string) {
     const app = initializeApp(firebaseConfig);

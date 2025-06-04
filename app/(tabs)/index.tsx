@@ -32,10 +32,12 @@ export default function index() {
     const drinkRef = ref(database,"Drinks");
     onValue (drinkRef, (snapshot) => {
       const data = snapshot.val();
-      setDrink(data ? Object.keys(data).map(key => ({
-        id : key, 
-        ...data[key],
-      })): []);
+      if (data) {
+        setDrink(data ? Object.keys(data).map(key => ({
+          id : key, 
+          ...data[key],
+        })): []);
+      }
     } )
   },[])
 
