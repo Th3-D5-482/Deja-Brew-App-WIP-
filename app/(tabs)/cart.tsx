@@ -51,7 +51,7 @@ export default function cart() {
         const itemKey = Object.keys(data).find(key => data[key].id === targetID);
         if (itemKey) {
           const itemRef = ref(database,`Cart/${itemKey}`);
-          const newNumberInCart = (data[itemKey].numberInCart)+1;
+          const newNumberInCart = (data[itemKey].numberInCart) + 1;
           update(itemRef,{numberInCart: newNumberInCart})
         }
       }
