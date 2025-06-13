@@ -39,6 +39,11 @@ export default function cart() {
         })): []);
       return () => reRun();
     })
+    cartData?.forEach(item => {
+      total += item.changedPrice;
+    });
+    total += 8; 
+    setTotal(total);
   },[])
 
   function incrementCart(targetID: string) {
@@ -93,6 +98,10 @@ export default function cart() {
         }
       }
     });
+  }
+
+  function calculateTotal() {
+    
   }
 
   return (
