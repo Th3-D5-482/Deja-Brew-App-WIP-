@@ -14,10 +14,11 @@ interface cartItem {
   id: number;
   image: string;
   name: string;
-  price: number;
+  fixedPrice: number;
   ratings: number;
   subTitle: string;
   numberInCart: number;
+  changedPrice: number;
 }
 
 export default function cart() {
@@ -51,7 +52,9 @@ export default function cart() {
         if (itemKey) {
           const itemRef = ref(database,`Cart/${itemKey}`);
           const newNumberInCart = (data[itemKey].numberInCart) + 1;
-          update(itemRef,{numberInCart: newNumberInCart})
+          const newPrice = ((data[itemKey].fixedPrice) * newNumberInCart).toFixed(2);
+          update(itemRef,{numberInCart: newNumberInCart});
+          update(itemRef,{changedPrice: newPrice});
         }
       }
     }, { onlyOnce: true });
@@ -68,7 +71,9 @@ export default function cart() {
         if (itemKey && data[itemKey].numberInCart > 1) {
           const itemRef = ref(database, `Cart/${itemKey}`);
           const newNumberInCart = (data[itemKey].numberInCart) - 1;
-          update(itemRef, { numberInCart: newNumberInCart })
+          const newPrice = ((data[itemKey].fixedPrice) * newNumberInCart).toFixed(2);
+          update(itemRef, { numberInCart: newNumberInCart });
+          update(itemRef, { changedPrice: newPrice });
         }
       }
     },{onlyOnce: true});
@@ -104,7 +109,7 @@ export default function cart() {
             <View className='mt-5 max-h-max flex flex-col gap-7'>
               {
                 cartData?.map((item, index) => {
-                  price = Number(item.price);
+                  price = Number(item.changedPrice);
                   quantityInCart = Number(item.numberInCart);
                   return (
                     <View className='h-[130px] rounded-xl bg-[#362c36] flex flex-row px-4 py-4' key={index}>

@@ -41,9 +41,10 @@ export default function description() {
       description: description,
       image: image,
       numberInCart: 1,
-      price: price,
+      fixedPrice: price,
       ratings: ratings,
       subTitle: subTitle,
+      changedPrice: price,
     };
     const newCartRef = push(cartRef);
     set(newCartRef, sampleItem);  
