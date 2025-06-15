@@ -7,16 +7,15 @@ import { Image, Text, ToastAndroid, TouchableOpacity, View } from 'react-native'
 export default function profile() {
   const [tapCount, setTapCount] = useState(1);
 
-  const handleTap = () => {
-    setTapCount(preCount => {
-      if (preCount === 7) {
-        router.push('/about');
-        return 1;
-      }
-      ToastAndroid.show(`You are ${preCount} taps away`,ToastAndroid.SHORT);
-      return preCount + 1;
-    })
-  };
+ function handleTaps() {
+  setTapCount( preCount => {
+    if (preCount === 7) {
+      return 1;
+    }
+    setTimeout(() => {ToastAndroid.show('Hi',ToastAndroid.SHORT);},100);
+    return preCount + 1;
+  })
+ }
 
   return (
     <View className='flex-1 px-8 pt-8' style ={{backgroundColor: Colors.primary}}>
@@ -24,7 +23,7 @@ export default function profile() {
         <TouchableOpacity onPress={() => router.push('/(tabs)')} className='py-1'>
           <Ionicons name ="arrow-back" color ={Colors.inactiveTab} size ={28}/>
         </TouchableOpacity>
-        <TouchableOpacity className='py-1 ml-1' onPress={handleTap}>
+        <TouchableOpacity className='py-1 ml-1' onPress={handleTaps}>
           <Text className='text-2xl text-white text-center font-bold'>Profile</Text>
         </TouchableOpacity>
       </View>
