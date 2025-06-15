@@ -39,12 +39,15 @@ export default function cart() {
         })): []);
       return () => reRun();
     })
-    cartData?.forEach(item => {
-      total += item.changedPrice;
-    });
-    total += 8; 
-    setTotal(total);
   },[])
+
+  useEffect(()=> {
+    let totalAmount = 8; 
+    cartData?.forEach(item => {
+      totalAmount += Number(item.changedPrice);
+    });
+    setTotal(totalAmount);
+  },[cartData])
 
   function incrementCart(targetID: string) {
     const app = initializeApp(firebaseConfig);
@@ -98,10 +101,6 @@ export default function cart() {
         }
       }
     });
-  }
-
-  function calculateTotal() {
-    
   }
 
   return (
@@ -166,7 +165,7 @@ export default function cart() {
           <View className='h-[100px]'>
             <View className='flex flex-row justify-between mb-2'>
               <Text className='text-white text-2xl'>Grand Total</Text>
-              <Text className='text-white text-2xl font-bold'>${total.toFixed(2)}</Text>
+              <Text className='text-white text-2xl font-bold'>${total}</Text>
             </View>
             <TouchableOpacity className='h-[50px] rounded-xl mb-5 bg-[#efe3c8] py-4 mt-3'>
               <Text className='text-center text-xl font-bold'>Pay Now</Text>
