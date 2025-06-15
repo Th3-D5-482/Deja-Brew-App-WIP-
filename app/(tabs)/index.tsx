@@ -1,6 +1,5 @@
 import { Colors } from '@/components/colors';
 import { firebaseConfig } from '@/firebaseConfig';
-import { Ionicons } from '@expo/vector-icons';
 import { router } from 'expo-router';
 import { initializeApp } from 'firebase/app';
 import { getDatabase, onValue, ref } from 'firebase/database';
@@ -103,12 +102,7 @@ export default function index() {
                     <TouchableOpacity onPress = {() => router.push({pathname: "/description",params: {image: item.image,name: item.name, price: item.price, ratings: item.ratings, description: item.description, subTitle: item.subTitle,id: item.id,catId: item.catID}})} key={index} className='w-[48%] h-[300px] bg-[#362c36] px-5 rounded-xl py-5 mt-5'>
                       <Image source={{uri:item.image}} style={{ width: 120, height: 150, objectFit: "cover"}} className='mx-auto'/>
                       <Text className='mt-3 text-white text-xl md:mx-auto h-[50px]'>{item.name}</Text>
-                      <View className='w-full mt-3 h-10 bg-[#463d46] rounded-xl flex flex-row justify-between'>
-                        <Text className='py-1 text-white text-2xl font-bold mx-auto'>${item.price}</Text>
-                        <View className='w-10 h-10 border bg-[#efe3c8] rounded-xl'>
-                          <Ionicons name ="add" size ={32} color ={Colors.secondary}/>
-                        </View>
-                      </View>
+                      <Text className='py-1 text-white text-2xl font-bold px-10 w-full mt-3 h-10 bg-[#463d46] rounded-xl'>${item.price}</Text>
                     </TouchableOpacity>
                   );
                 })
@@ -120,12 +114,7 @@ export default function index() {
                   <TouchableOpacity className='w-[48%] h-[300px] bg-[#362c36] px-5 rounded-xl py-5 mt-5' key={index} onPress={() => router.push({pathname: "/description", params: {image: item.image, name: item.name, price: item.price, ratings: item.ratings, description: item.description, subTitle: item.subTitle,id: item.id,catId: item.catID}})}>
                     <Image source={{uri:item.image}} style={{ width: 120, height: 150, objectFit: "cover"}} className='mx-auto'/>
                     <Text className='mt-3 text-white text-xl md:mx-auto h-[50px]'>{item.name}</Text>
-                    <View className='w-full mt-3 h-10 bg-[#463d46] rounded-xl flex flex-row justify-between'>
-                      <Text className='py-1 text-white text-2xl font-bold mx-auto'>${item.price}</Text>
-                      <View className='w-10 h-10 border bg-[#efe3c8] rounded-xl'>
-                          <Ionicons name ="add" size ={32} color ={Colors.secondary}/>
-                      </View>
-                    </View>
+                    <Text className='py-1 text-white text-2xl font-bold px-10 w-full mt-3 h-10 bg-[#463d46] rounded-xl'>${item.price}</Text>
                   </TouchableOpacity>
                 );
               })
@@ -137,12 +126,7 @@ export default function index() {
                   <TouchableOpacity className='w-[48%] h-[300px] bg-[#362c36] px-5 rounded-xl py-5 mt-5' key={index} onPress={() => router.push({pathname: "/description", params: {image: item.image, name: item.name, price: item.price, ratings: item.ratings, description: item.description, subTitle: item.subTitle,id: item.id,catId: item.catID}})}>
                     <Image source={{uri:item.image}} style={{ width: 120, height: 150, objectFit: "cover"}} className='mx-auto'/>
                     <Text className='mt-3 text-white text-xl md:mx-auto h-[50px]'>{item.name}</Text>
-                    <View className='w-full mt-3 h-10 bg-[#463d46] rounded-xl flex flex-row justify-between'>
-                      <Text className='py-1 text-white text-2xl font-bold mx-auto'>${item.price}</Text>
-                      <View className='w-10 h-10 border bg-[#efe3c8] rounded-xl'>
-                        <Ionicons name ="add" size ={32} color ={Colors.secondary}/>
-                      </View>
-                    </View>
+                    <Text className='py-1 text-white text-2xl font-bold px-10 w-full mt-3 h-10 bg-[#463d46] rounded-xl'>${item.price}</Text>
                   </TouchableOpacity>
                 );
               })
@@ -154,12 +138,7 @@ export default function index() {
                   <TouchableOpacity className='w-[48%] h-[300px] bg-[#362c36] px-5 rounded-xl py-5 mt-5' key={index} onPress={() => router.push({pathname: "/description", params: {image: item.image, name: item.name, price: item.price, ratings: item.ratings, description: item.description, subTitle: item.subTitle,id: item.id,catId: item.catID}})}>
                     <Image source={{uri:item.image}} style={{ width: 120, height: 150, objectFit: "cover"}} className='mx-auto'/>
                     <Text className='mt-3 text-white text-xl md:mx-auto h-[50px]'>{item.name}</Text>
-                    <View className='w-full mt-3 h-10 bg-[#463d46] rounded-xl flex flex-row justify-between'>
-                      <Text className='py-1 text-white text-2xl font-bold mx-auto'>${item.price}</Text>
-                      <View className='w-10 h-10 border bg-[#efe3c8] rounded-xl'>
-                        <Ionicons name ="add" size ={32} color ={Colors.secondary}/>
-                      </View>
-                    </View>
+                    <Text className='py-1 text-white text-2xl font-bold px-10 w-full mt-3 h-10 bg-[#463d46] rounded-xl'>${item.price}</Text>
                   </TouchableOpacity>
                 );
               })
