@@ -35,7 +35,7 @@ export default function cart() {
       const data = snapshot.val();
       setCartData(data ? Object.keys(data).map(key => ({
           id: key,
-          ...data[key],
+          ...data[key], 
         })): []);
       return () => reRun();
     })
