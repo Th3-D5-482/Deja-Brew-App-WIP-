@@ -2,7 +2,7 @@ import { Colors } from '@/components/colors'
 import { Ionicons } from '@expo/vector-icons'
 import { router } from 'expo-router'
 import React from 'react'
-import { Image, Text, TouchableOpacity, View } from 'react-native'
+import { Image, Linking, Text, TouchableOpacity, View } from 'react-native'
 
 export default function profile() {
   return (
@@ -15,12 +15,13 @@ export default function profile() {
       </View>
       <View className='mt-5 h-[680px]'>
         <View className='h-[250px] w-[250px] rounded-full p-1 overflow-hidden mx-auto mt-8'>
-          <Image source ={{uri: 'https://ik.imagekit.io/j7iwyd9ys/Deja%20Brew/Th3_D5_482.jpeg?updatedAt=1747756993672'}} style ={{width: 240, height: 240, objectFit: 'contain'}}/>
+          <Image source ={require('@/assets/images/Th3_D5_482.jpeg')} style ={{width: 240, height: 240, objectFit: 'contain'}}/>
         </View>
         <Text className='text-white text-3xl text-center mt-5 font-bold'>Th3_D5_482</Text>
         <Text className='text-xl mx-2 mt-3 text-gray-400'> "I'm an innovative software developer passionate about creating efficient, user-friendly applications. With a strong background in various programming languages, I excel at solving complex problems and turning ideas into reality. I'm committed to continuous learning and delivering top-notch solutions that exceed expectations."</Text>
-        <TouchableOpacity className='h-[50px] border border-yellow-800 rounded-xl mt-8 bg-[#efe3c8] mx-2 py-3' onPress={() => router.push('/(tabs)')}>
-          <Text className='text-center text-xl font-bold'>Sign Out</Text>
+        <TouchableOpacity className='h-[50px] border border-yellow-800 rounded-xl mt-8 bg-[#efe3c8] mx-2 py-3 flex flex-row px-[30%]' onPress={() => {Linking.openURL('https://github.com/Th3-D5-482');}} >
+          <Ionicons name ="logo-github" size={32}/>
+          <Text className='text-center text-xl font-bold my-auto ml-2'>GitHub</Text>
         </TouchableOpacity>
       </View>
     </View>
