@@ -4,15 +4,17 @@ import { router } from 'expo-router'
 import React, { useState } from 'react'
 import { Image, Text, ToastAndroid, TouchableOpacity, View } from 'react-native'
 
+
 export default function profile() {
   const [tapCount, setTapCount] = useState(1);
 
  function handleTaps() {
   setTapCount( preCount => {
     if (preCount === 7) {
+      router.push('/about');
       return 1;
     }
-    setTimeout(() => {ToastAndroid.show('Hi',ToastAndroid.SHORT);},100);
+    ToastAndroid.show(`${7-preCount} taps left`,100);
     return preCount + 1;
   })
  }
