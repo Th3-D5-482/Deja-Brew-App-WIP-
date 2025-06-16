@@ -11,6 +11,8 @@ interface cartList {
 }
 export default function _layout() {
     const [cartData,setCartData] = useState<cartList[]>();
+    const [favoriteData,setFavoriteData] = useState<cartList[]>();
+
     useEffect(() => {
         const app = initializeApp(firebaseConfig);
         const database = getDatabase(app);
@@ -24,6 +26,21 @@ export default function _layout() {
         })
         return () => reRun();
     },[]);
+
+    useEffect(()=> {
+        const app = initializeApp(firebaseConfig);
+        const database = getDatabase(app);
+        const favoriteRef = ref(database,"Favorites");
+        const reRun = onValue(favoriteRef,(snapshot) => {
+            const data = snapshot.val();
+            setFavoriteData(data ? Object.keys(data).map(key => ({
+                id: key,
+                ...data[key],
+            })):[]);
+        });
+        return () => reRun(); 
+    },[])
+
   return (
     <Tabs screenOptions={{
         headerShown: false,
@@ -58,7 +75,7 @@ export default function _layout() {
             tabBarIcon: ({size,color}) => (
                 <Ionicons name ="heart" size={size} color={color} />
             ),
-            tabBarBadge:undefined,
+            tabBarBadge:(favoriteData?.length ?? 0) > 0 ? favoriteData!.length : undefined,
             tabBarBadgeStyle: {
                 backgroundColor: Colors.tertiary,
                 height: 18,
