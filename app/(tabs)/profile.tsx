@@ -2,7 +2,7 @@ import { Colors } from '@/components/colors'
 import { Ionicons } from '@expo/vector-icons'
 import { router } from 'expo-router'
 import React, { useState } from 'react'
-import { Image, Text, ToastAndroid, TouchableOpacity, View } from 'react-native'
+import { Image, Text, TouchableOpacity, View } from 'react-native'
 
 
 export default function profile() {
@@ -14,7 +14,6 @@ export default function profile() {
       router.push('/about');
       return 1;
     }
-    ToastAndroid.show(`${7-preCount} taps left`,100);
     return preCount + 1;
   })
  }
