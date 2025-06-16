@@ -13,8 +13,8 @@ interface coffeeItem {
 
 export default function description() {
   const {image,name,price,ratings,description,subTitle,id,catId} = useLocalSearchParams();
-  const [favorite,setFavorite] = useState(false);
   const [cartData,setCartData] = useState<coffeeItem[]>();
+  const [favoriteData,setFavoriteData] = useState<coffeeItem[]>();
 
   useEffect(() => {
     const app = initializeApp(firebaseConfig);
@@ -29,6 +29,19 @@ export default function description() {
     })
     return () => reRun();
   },[]);
+
+  useEffect(()=> {
+    const app = initializeApp(firebaseConfig);
+    const database = getDatabase(app);
+    const favoriteRef = ref(database,"Favorites");
+    const reRun = onValue(favoriteRef,(snapshot) => {
+      const data = snapshot.val();
+      setFavoriteData(data ? Object.keys(data).map(key => ({
+        id: key,
+        ...data[key],
+      })):[])
+    })
+  },[])
 
   function addToCart() {
     const app = initializeApp(firebaseConfig);
@@ -68,6 +81,42 @@ export default function description() {
     },{onlyOnce: true});
   }
 
+  function addToFavorites() {
+    const app = initializeApp(firebaseConfig);
+    const database = getDatabase(app);
+    const favoriteRef = ref(database,"Favorites");
+    const favoritesItems = {
+      id: id,
+      catID: catId,
+      name: name,
+      description: description,
+      image: image,
+      fixedPrice: price,
+      ratings: ratings,
+      subTitle: subTitle,
+    }
+    const itemRef = push(favoriteRef);
+    set(itemRef,favoritesItems);
+  }
+
+  function removeFromFavorites() {
+    const app = initializeApp(firebaseConfig);
+    const database = getDatabase(app);
+    const favoiteRef = ref(database,"Favorites");
+    onValue(favoiteRef,(snapshot) => {
+      const data = snapshot.val();
+      if (data) {
+        const itemKey = Object.keys(data).find(key => data[key].id === id);
+        if (itemKey) {
+          const itemRef = ref(database,`Favorites/${itemKey}`);
+          remove(itemRef).then(() => {
+          setFavoriteData(preFavoriteData => (preFavoriteData ?? []).filter(item => String(item.id) !== String(id)));
+        });
+        }
+      }
+    },{onlyOnce: true})
+  }
+
   return (
     <View className ='flex-1 px-8 pt-5' style = {{backgroundColor: Colors.primary}}>
         <ScrollView showsVerticalScrollIndicator = {false}>
@@ -93,9 +142,13 @@ export default function description() {
                 </View>
               </View>
               <View className='w-[20%] h-[80px] p-5'>
-                <TouchableOpacity onPress={() => setFavorite(!favorite)}>
-                  {favorite ? <Ionicons name='heart' size={40} color ={Colors.tertiary}/>: <Ionicons name='heart' size={40} color ={Colors.inactiveTab}/> }
-                </TouchableOpacity>
+                  {favoriteData?.some(item => String(item.id) === String(id)) ? 
+                  <TouchableOpacity onPress={()=> removeFromFavorites()}>
+                    <Ionicons name='heart' size={40} color ={Colors.tertiary}/>
+                  </TouchableOpacity> :
+                  <TouchableOpacity onPress = {()=> addToFavorites()}>
+                    <Ionicons name='heart' size={40} color ={Colors.inactiveTab}/>
+                  </TouchableOpacity>  }
               </View>
             </View>
             <View>
