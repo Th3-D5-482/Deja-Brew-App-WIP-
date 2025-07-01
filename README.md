@@ -1,52 +1,64 @@
-# Welcome to your Expo app 👋
+# ☕ Deja Brew
 
-# Project: Lyon 
+### 👤 Created by: Th3_D5_482
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+---
 
-## Get started
+## 📘 Overview  
+**Deja Brew** is a full-featured coffee and beverage ordering app built using **React Native** for the frontend and **Firebase** for the backend. Designed with smooth navigation and personalized touches, the app allows users to browse, favorite, and purchase products effortlessly—while also hiding a fun Easter egg that reveals the creator’s profile.
 
-1. Install dependencies
+---
 
-   ```bash
-   npm install
-   ```
+## 🧰 Technologies Used  
+- **React Native** – Enables native app performance across iOS and Android from a single codebase  
+- **Firebase** – Powers authentication, real-time database storage, and backend services
 
-2. Start the app
+---
 
-   ```bash
-   npx expo start
-   ```
+## 🚀 Features
 
-In the output, you'll find options to open the app in a
+### 🔐 User Authentication  
+- **Register/Login** – Secure account creation and access using email and password
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+---
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+### 🏠 Home Page  
+- **Search Bar** – Easily search for drinks and items by keyword  
+- **Category View** – Switch between product categories (e.g., hot drinks, cold brews)  
+- **Product Listings** – Tap on any item to view details
 
-## Get a fresh project
+---
 
-When you're ready, run:
+### 📝 Product Description Page  
+- Displays product image and description  
+- Add to **Cart** or mark as **Favorite**
 
-```bash
-npm run reset-project
-```
+---
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+### 🛒 Cart  
+- View all added items  
+- Edit quantities or remove items  
+- Automatically calculate totals and proceed to payment
 
-## Learn more
+---
 
-To learn more about developing your project with Expo, look at the following resources:
+### ❤️ Favorites  
+- Save and manage frequently loved items
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+---
 
-## Join the community
+### 👤 Profile Page  
+- Update user details like name, email, and password  
+- ✨ **Easter Egg** – After multiple taps, reveals the creator’s description, profile picture, and GitHub link
 
-Join our community of developers creating universal apps.
+---
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+### 🔄 Smooth Navigation  
+- Navigate across **Home**, **Cart**, **Favorites**, **Profile**, **Search**, **Category Pages**, and **Details Pages** seamlessly with fluid UI transitions
+
+---
+
+## 🎯 Conclusion  
+**Deja Brew** combines functional ordering tools with a clean design and a playful creator Easter egg. With real-time Firebase integration and a React Native frontend, it delivers a smooth and interactive experience that’s as delightful as your favorite brew.
+
+---
