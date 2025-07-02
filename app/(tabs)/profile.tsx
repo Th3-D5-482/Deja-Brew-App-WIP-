@@ -2,11 +2,12 @@ import { Colors } from '@/components/colors'
 import { Ionicons } from '@expo/vector-icons'
 import { router } from 'expo-router'
 import React, { useState } from 'react'
-import { Image, ScrollView, Text, TouchableOpacity, View } from 'react-native'
+import { Image, ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native'
 
 
 export default function profile() {
   const [tapCount, setTapCount] = useState(1);
+  const [name,setName] = useState('');
 
   function handleTaps() {
     setTapCount(preCount => {
@@ -16,6 +17,15 @@ export default function profile() {
       }
       return preCount + 1;
     })
+  }
+
+  function handleNameChange(text: string) {
+    const filtered = text
+    .split('')
+    .filter(char => /^[A-Za-z\s]$/.test(char))
+    .join('');
+
+    setName(filtered);
   }
 
   return (
@@ -30,8 +40,9 @@ export default function profile() {
           </TouchableOpacity>
         </View>
         <Image source={require('@/assets/images/Th3_D5_482.jpeg')} style={{ width: 250, height: 250, objectFit: 'contain' }} className='mx-auto mt-10 rounded-full' />
-        <View className='border border-red-800'>
-
+        <View className='border border-red-800 mt-10 h-[500px]'>
+          <Text className='text-white text-2xl mx-auto'>Full Name</Text>
+        <TextInput className =' mt-8 bg-white rounded-xl' placeholder='Enter your full name' onChangeText={handleNameChange} autoCapitalize='words'/>
         </View>
       </ScrollView>
     </View>
