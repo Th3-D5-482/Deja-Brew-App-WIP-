@@ -1,4 +1,4 @@
-# ☕ Deja Brew (WIP) 
+# ☕ Deja Brew (Project: Lyon) (WIP) 
 
 ### 👤 Created by: Th3_D5_482
 
