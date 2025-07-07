@@ -57,6 +57,11 @@
 
 ### 🔄 Smooth Navigation  
 - Navigate across **Home**, **Cart**, **Favorites**, **Profile**, **Search**, **Category Pages**, and **Details Pages** seamlessly with fluid UI transitions
+  
+---
+
+## 🙏 Acknowledgment  
+Special thanks to [Nickel Fox](https://www.figma.com/@nickelfox), whose design ingenuity and creativity inspired Deja Brew look and feel.
 
 ---
 
