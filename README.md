@@ -61,7 +61,7 @@
 ---
 
 ## 🙏 Acknowledgment  
-Special thanks to [Nickel Fox](https://www.figma.com/@nickelfox), whose design ingenuity and creativity inspired Deja Brew look and feel.
+Special thanks to [Nickelfox Design](https://www.figma.com/@nickelfox), whose design ingenuity and creativity inspired Deja Brew look and feel.
 
 ---
 
