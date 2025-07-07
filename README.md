@@ -1,4 +1,4 @@
-# ☕ Deja Brew (WIP) 
+# ☕ Roastic Coffee App(WIP) 
 
 ### 🔐 Code name: Project Lyon
 
@@ -7,7 +7,7 @@
 ---
 
 ## 📘 Overview  
-**Deja Brew** is a full-featured coffee and beverage ordering app built using **React Native** for the frontend and **Firebase** for the backend. Designed with smooth navigation and personalized touches, the app allows users to browse, favorite, and purchase products effortlessly—while also hiding a fun Easter egg that reveals the creator’s profile.
+**Roastic** is a full-featured coffee and beverage ordering app built using **React Native** for the frontend and **Firebase** for the backend. Designed with smooth navigation and personalized touches, the app allows users to browse, favorite, and purchase products effortlessly—while also hiding a fun Easter egg that reveals the creator’s profile.
 
 ---
 
@@ -61,11 +61,11 @@
 ---
 
 ## 🙏 Acknowledgment  
-Special thanks to [Nickelfox Design](https://www.figma.com/@nickelfox), whose design ingenuity and creativity inspired Deja Brew look and feel.
+Special thanks to [Nickelfox Design](https://www.figma.com/@nickelfox), whose design ingenuity and creativity inspired Roastic look and feel.
 
 ---
 
 ## 🎯 Conclusion  
-**Deja Brew** combines functional ordering tools with a clean design and a playful creator Easter egg. With real-time Firebase integration and a React Native frontend, it delivers a smooth and interactive experience that’s as delightful as your favorite brew.
+**Roastic** combines functional ordering tools with a clean design and a playful creator Easter egg. With real-time Firebase integration and a React Native frontend, it delivers a smooth and interactive experience that’s as delightful as your favorite brew.
 
 ---
