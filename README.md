@@ -1,4 +1,6 @@
-# ☕ Deja Brew (Project: Lyon) (WIP) 
+# ☕ Deja Brew (WIP) 
+
+### 🔐 Code name: Project Lyon
 
 ### 👤 Created by: Th3_D5_482
 
