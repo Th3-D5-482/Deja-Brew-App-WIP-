@@ -6,4 +6,5 @@ export const Colors = {
     star: '#D3A601',
     tertiary: "#C94C4C",
     delete: "#800000",
+    white: '#FFFFFF',
 }
