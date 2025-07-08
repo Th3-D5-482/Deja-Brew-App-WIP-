@@ -72,9 +72,8 @@ export default function index() {
     <View className="flex-1 px-8 pt-5" style ={{backgroundColor: Colors.primary}}>
       <ScrollView contentContainerStyle ={{paddingBottom: 20}} showsVerticalScrollIndicator = {false}>
         <StatusBar backgroundColor={Colors.primary}/>
-        <View className='flex flex-row justify-center mb-12 gap-2'>
-          <Text className='text-[#877b74] text-[32px]'>déjà</Text>
-          <Text className='text-white text-[32px]'>Brew</Text>
+        <View className='flex flex-row justify-center mb-12'>
+          <Text className='text-[#877b74] text-[32px]'>Roastic</Text>
         </View>
         <View className='rounded-xl bg-[#171017] h-50 text-[18px] text-white flex-row px-[15px] mb-12 gap-5 md:h-[40px]'>
           <Image source={require('@/assets/images/search.png')} className='top-[15px] md:top-[10px]'/>
