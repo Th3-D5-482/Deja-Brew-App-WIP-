@@ -4,7 +4,6 @@ import { router } from 'expo-router'
 import React from 'react'
 import { Image, Linking, Text, TouchableOpacity, View } from 'react-native'
 
-
 export default function profile() {
   return (
     <View className='flex-1 px-8 pt-8' style={{ backgroundColor: Colors.primary }}>
