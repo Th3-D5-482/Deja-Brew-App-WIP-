@@ -49,9 +49,9 @@
 
 ---
 
-### 👤 Profile Page  
-- Update user details like name, email, and password  
-- ✨ **Easter Egg** – After multiple taps, reveals the creator’s description, profile picture, and GitHub link
+### 👤 About Me  
+- Users can read background information and insights about the creator  
+- Visit the creator’s GitHub page for open-source contributions and projects
 
 ---
 
