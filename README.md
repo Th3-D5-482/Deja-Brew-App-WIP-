@@ -1,4 +1,4 @@
-# ☕ Roastic Coffee App (WIP) 
+# ☕ Roastic Coffee App
 
 ### 🔐 Code name: Project Lyon
 
