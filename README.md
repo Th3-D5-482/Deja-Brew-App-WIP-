@@ -63,6 +63,6 @@ Special thanks to [Nickelfox Design](https://www.figma.com/@nickelfox), whose de
 ---
 
 ## 🎯 Conclusion  
-**Roastic** combines functional ordering tools with a clean design and a playful creator Easter egg. With real-time Firebase integration and a React Native frontend, it delivers a smooth and interactive experience that’s as delightful as your favorite brew.
+**Roastic** combines functional ordering tools with a clean design. With real-time Firebase integration and a React Native frontend, it delivers a smooth and interactive experience that’s as delightful as your favorite brew.
 
 ---
