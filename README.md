@@ -19,9 +19,6 @@
 
 ## 🚀 Features
 
-### 🔐 User Authentication  
-- **Register/Login** – Secure account creation and access using email and password
-
 ---
 
 ### 🏠 Home Page  
