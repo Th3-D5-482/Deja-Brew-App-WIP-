@@ -7,7 +7,7 @@
 ---
 
 ## 📘 Overview  
-**Roastic** is a full-featured coffee and beverage ordering app built using **React Native** for the frontend and **Firebase** for the backend. Designed with smooth navigation and personalized touches, the app allows users to browse, favorite, and purchase products effortlessly—while also hiding a fun Easter egg that reveals the creator’s profile.
+**Roastic** is a full-featured coffee and beverage ordering app built using **React Native** for the frontend and **Firebase** for the backend. Designed with smooth navigation and personalized touches, the app allows users to browse, favorite, and purchase products effortlessly.
 
 ---
 
@@ -22,8 +22,7 @@
 ---
 
 ### 🏠 Home Page  
-- **Search Bar** – Easily search for drinks and items by keyword  
-- **Category View** – Switch between product categories (e.g., hot drinks, cold brews)  
+- **Category View** – Switch between product categories
 - **Product Listings** – Tap on any item to view details
 
 ---
@@ -53,7 +52,7 @@
 ---
 
 ### 🔄 Smooth Navigation  
-- Navigate across **Home**, **Cart**, **Favorites**, **Profile**, **Search**, **Category Pages**, and **Details Pages** seamlessly with fluid UI transitions
+- Navigate across **Home**, **Cart**, **Favorites**, **Categories**, and **Details Pages** seamlessly with fluid UI transitions
   
 ---
 
