@@ -14,6 +14,8 @@
 ## 🧰 Technologies Used  
 - **React Native** – Enables native app performance across iOS and Android from a single codebase  
 - **Firebase** – Powers authentication, real-time database storage, and backend services
+- **ImageKit.io** – Media CDN and cloud storage platform for optimized delivery of assets including images, videos, and other static files
+- **PicLumen** – AI-powered image generation tool used to create all visual assets for SnowCone. Supports high-resolution outputs, customizable styles (e.g. realistic, anime, abstract), and smart editing features like background removal and upscaling.
 
 ---
 
